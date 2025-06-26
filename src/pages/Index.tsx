@@ -1,7 +1,6 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, ChevronDown, Building2, Users, TrendingUp } from "lucide-react";
+import { ArrowRight, ChevronDown, Building2, Users, TrendingUp, Shield, Zap, Globe } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import EcosystemStack from "@/components/EcosystemStack";
@@ -11,46 +10,82 @@ const Index = () => {
     <div className="min-h-screen bg-white">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      {/* Hero Section - Enhanced with more content */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-16">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
-            alt="Technology workspace"
-            className="w-full h-full object-cover opacity-10"
+            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
+            alt="AI and blockchain technology"
+            className="w-full h-full object-cover opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/90 to-white/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-white/95 via-white/90 to-white/95"></div>
         </div>
         
-        <div className="container mx-auto px-4 sm:px-6 text-center relative z-10">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight font-serif">
+        <div className="container mx-auto px-4 sm:px-6 text-center relative z-10 max-w-6xl">
+          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight font-serif">
             Redefining Human + AI
             <span className="block text-blue-600">
-              Collaboration.
+              Collaboration
             </span>
           </h1>
-          <p className="text-lg sm:text-xl text-gray-700 mb-8 max-w-4xl mx-auto leading-relaxed">
+          
+          <p className="text-lg sm:text-xl text-slate-700 mb-8 max-w-4xl mx-auto leading-relaxed">
             An integrated ecosystem of autonomous AI agents, privacy-first smart devices, 
             and decentralized identity, all powered by the blockchain.
           </p>
-          <Button 
-            size="lg" 
-            className="btn-primary text-lg px-8 py-4"
-            onClick={() => document.getElementById('ecosystem')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Explore the Ecosystem
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+
+          {/* Key Value Props */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto">
+            <div className="flex flex-col items-center text-center p-4">
+              <Shield className="h-8 w-8 text-blue-600 mb-3" />
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Privacy-First</h3>
+              <p className="text-sm text-slate-600">Your data stays yours with hardware-level security and decentralized infrastructure</p>
+            </div>
+            <div className="flex flex-col items-center text-center p-4">
+              <Zap className="h-8 w-8 text-blue-600 mb-3" />
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Autonomous Intelligence</h3>
+              <p className="text-sm text-slate-600">AI agents that remember, think, and act across all your devices and platforms</p>
+            </div>
+            <div className="flex flex-col items-center text-center p-4">
+              <Globe className="h-8 w-8 text-blue-600 mb-3" />
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Enterprise Ready</h3>
+              <p className="text-sm text-slate-600">Seamless integration with existing enterprise systems and workflows</p>
+            </div>
+          </div>
+
+          {/* Funding Status */}
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8 max-w-2xl mx-auto">
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">Now Raising Pre-Seed</h3>
+            <p className="text-slate-700 mb-4">$500K to accelerate development & secure strategic partnerships</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Button 
+                size="lg" 
+                className="btn-primary text-base px-6 py-3"
+                onClick={() => window.location.href = '/invest'}
+              >
+                View Investment Details
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="btn-secondary text-base px-6 py-3"
+                onClick={() => document.getElementById('ecosystem')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Explore Technology
+              </Button>
+            </div>
+          </div>
         </div>
         
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <ChevronDown className="h-8 w-8 text-gray-400" />
+          <ChevronDown className="h-6 w-6 text-slate-400" />
         </div>
       </section>
 
       {/* Problem Section */}
-      <section className="py-16 sm:py-20 bg-gray-50">
+      <section className="py-16 sm:py-20 bg-slate-50">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-8 font-serif">
@@ -85,7 +120,7 @@ const Index = () => {
       </section>
 
       {/* Ecosystem Overview */}
-      <section id="ecosystem" className="py-16 sm:py-20 bg-gray-50">
+      <section id="ecosystem" className="py-16 sm:py-20 bg-slate-50">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 font-serif">
