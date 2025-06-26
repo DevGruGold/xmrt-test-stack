@@ -49,21 +49,21 @@ const EcosystemStack = () => {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="space-y-4">
+      <div className="space-y-3">
         {layers.map((layer, index) => (
           <Card 
             key={layer.id}
             className={`${layer.color} hover:shadow-md transition-all duration-300 cursor-pointer group`}
             onClick={() => window.location.href = layer.link}
           >
-            <CardContent className="p-4 sm:p-6">
+            <CardContent className="p-4 sm:p-5">
               <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-4 sm:space-x-6">
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white border-2 ${layer.color.replace('bg-', 'border-').replace('-100', '-300')} flex items-center justify-center ${layer.textColor} font-bold text-lg`}>
+                <div className="flex items-center space-x-4 sm:space-x-5">
+                  <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-white border-2 ${layer.color.replace('bg-', 'border-').replace('-100', '-300')} flex items-center justify-center ${layer.textColor} font-bold text-base`}>
                     {layer.id}
                   </div>
                   <div>
-                    <h3 className={`text-lg sm:text-xl font-bold mb-2 font-serif ${layer.textColor}`}>{layer.title}</h3>
+                    <h3 className={`text-lg sm:text-xl font-bold mb-1 font-serif ${layer.textColor}`}>{layer.title}</h3>
                     <p className="text-gray-700 text-sm sm:text-base">{layer.description}</p>
                   </div>
                 </div>
@@ -74,8 +74,8 @@ const EcosystemStack = () => {
         ))}
       </div>
       
-      <div className="text-center mt-12">
-        <p className="text-gray-600 mb-6 text-sm sm:text-base">
+      <div className="text-center mt-8">
+        <p className="text-gray-600 mb-4 text-sm sm:text-base">
           Each layer builds upon the foundation below, creating a comprehensive ecosystem 
           for the future of intelligent collaboration.
         </p>
