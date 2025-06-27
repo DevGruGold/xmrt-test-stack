@@ -25,40 +25,40 @@ const Index = () => {
         
         <div className="container mx-auto px-4 sm:px-6 text-center relative z-10 max-w-6xl">
           <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-slate-900 mb-4 leading-tight font-serif">
-            Redefining Human + AI
+            Live Multi-Chain Protocol:
             <span className="block text-blue-600">
-              Collaboration
+              XMR to DeFi Bridge
             </span>
           </h1>
           
           <p className="text-lg sm:text-xl text-slate-700 mb-6 max-w-4xl mx-auto leading-relaxed">
-            An integrated ecosystem of autonomous AI agents, privacy-first smart devices, 
-            and decentralized identity, all powered by the blockchain.
+            Deployed smart contract converting XMR to XMRT with cross-chain bridging, 
+            AI governance, biometric NFC security, and offline transaction capabilities.
           </p>
 
           {/* Key Value Props - Reduced spacing */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 max-w-4xl mx-auto">
             <div className="flex flex-col items-center text-center p-3">
               <Shield className="h-7 w-7 text-blue-600 mb-2" />
-              <h3 className="text-base font-semibold text-slate-900 mb-1">Privacy-First</h3>
-              <p className="text-sm text-slate-600">Your data stays yours with hardware-level security and decentralized infrastructure</p>
+              <h3 className="text-base font-semibold text-slate-900 mb-1">Oracle-Verified XMR Conversion</h3>
+              <p className="text-sm text-slate-600">Live smart contract with EIP-712 signature verification and 21M max supply</p>
             </div>
             <div className="flex flex-col items-center text-center p-3">
               <Zap className="h-7 w-7 text-blue-600 mb-2" />
-              <h3 className="text-base font-semibold text-slate-900 mb-1">Autonomous Intelligence</h3>
-              <p className="text-sm text-slate-600">AI agents that remember, think, and act across all your devices and platforms</p>
+              <h3 className="text-base font-semibold text-slate-900 mb-1">Multi-Chain Bridging</h3>
+              <p className="text-sm text-slate-600">Native Polygon/Avalanche integration with Layer2 scaling and KYC compliance</p>
             </div>
             <div className="flex flex-col items-center text-center p-3">
               <Globe className="h-7 w-7 text-blue-600 mb-2" />
-              <h3 className="text-base font-semibold text-slate-900 mb-1">Enterprise Ready</h3>
-              <p className="text-sm text-slate-600">Seamless integration with existing enterprise systems and workflows</p>
+              <h3 className="text-base font-semibold text-slate-900 mb-1">AI-Governed DAO</h3>
+              <p className="text-sm text-slate-600">5 AI roles managing treasury, proposals, and upgrades with biometric security</p>
             </div>
           </div>
 
           {/* Funding Status - Reduced spacing */}
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 max-w-2xl mx-auto">
-            <h3 className="text-lg font-semibold text-slate-900 mb-2">Now Raising Pre-Seed</h3>
-            <p className="text-slate-700 mb-3">$500K to accelerate development & secure strategic partnerships</p>
+            <h3 className="text-lg font-semibold text-slate-900 mb-2">Smart Contract Live on Sepolia</h3>
+            <p className="text-slate-700 mb-3">Raising $500K for Polygon mainnet deployment & enterprise partnerships</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button 
                 size="lg" 
@@ -74,7 +74,7 @@ const Index = () => {
                 className="btn-secondary text-base px-6 py-3"
                 onClick={() => document.getElementById('ecosystem')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Explore Technology
+                Explore Live Protocol
               </Button>
             </div>
           </div>
@@ -90,14 +90,13 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 font-serif">
-              Today's Digital World is Powerful, But Broken.
+              Privacy Coins Meet DeFi Innovation.
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              AI has become incredibly powerful, but it's fragmented across countless apps and devices, 
-              unable to remember you. Your personal data is the price of admission, a trade-off we're 
-              told is necessary for convenience. For enterprises, AI remains a passive suggestion engine, 
-              not an active collaborator. And for the pioneers of the decentralized world, true on-chain 
-              identity and utility remain just out of reach.
+              XMR holders have been locked out of DeFi due to privacy features that exchanges 
+              can't handle. Our protocol bridges this gap with oracle-verified conversion, 
+              KYC compliance where required, and multi-chain accessibility—bringing privacy 
+              coin holders into the expanding DeFi ecosystem while maintaining security.
             </p>
           </div>
         </div>
@@ -108,13 +107,13 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 font-serif">
-              One Ecosystem to Unite Them All.
+              Live Protocol. Real Utility. Proven Technology.
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              XMRT Solutions shatters these silos. We are building the foundational layer for the 
-              next generation of intelligence—an ecosystem where your AI has persistent memory, your 
-              devices protect your privacy, and your identity is truly your own. This is where AI 
-              moves from suggesting to <em className="text-blue-600 font-semibold">doing</em>.
+              Our smart contract is deployed and operational, featuring upgradeable architecture, 
+              multi-signature AI governance, biometric NFC integration, and cross-chain bridging. 
+              This isn't a whitepaper—it's <em className="text-blue-600 font-semibold">working code 
+              processing real transactions</em>.
             </p>
           </div>
         </div>
@@ -125,10 +124,10 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 font-serif">
-              Our Layered Technology Stack.
+              Deployed Smart Contract Architecture.
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Five integrated layers working in harmony to create the future of human-AI collaboration.
+              Five integrated layers built on our live, upgradeable smart contract with real-world utility.
             </p>
           </div>
           <EcosystemStack />
@@ -140,7 +139,7 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4 font-serif">
-              From Vision to Reality: Our Journey.
+              From Code to Market: Our Execution.
             </h2>
           </div>
           
@@ -149,11 +148,11 @@ const Index = () => {
               <CardContent className="p-5 sm:p-6">
                 <div className="mb-3">
                   <Building2 className="h-7 w-7 text-blue-600 mb-2" />
-                  <h3 className="text-lg font-bold text-slate-900 font-serif">Current</h3>
+                  <h3 className="text-lg font-bold text-slate-900 font-serif">Live & Deployed</h3>
                 </div>
                 <p className="text-gray-700 leading-relaxed text-sm">
-                  Live front-end on XMRT.io, smart contracts deployed and tested on Sepolia, 
-                  functional staking prototype, and full Polygon deployment ready.
+                  Smart contract live on Sepolia with XMR conversion, multi-chain bridging, 
+                  AI governance, NFC security, and upgradeable architecture ready for mainnet.
                 </p>
               </CardContent>
             </Card>
@@ -165,8 +164,8 @@ const Index = () => {
                   <h3 className="text-lg font-bold text-slate-900 font-serif">Next 12 Months</h3>
                 </div>
                 <p className="text-gray-700 leading-relaxed text-sm">
-                  Public token launch, MVP hardware prototypes, inaugural enterprise pilot program, 
-                  and full community DAO rollout.
+                  Polygon mainnet deployment, CashDapp public launch, enterprise pilot programs, 
+                  NFC debit card distribution, and full DAO governance activation.
                 </p>
               </CardContent>
             </Card>
@@ -178,8 +177,8 @@ const Index = () => {
                   <h3 className="text-lg font-bold text-slate-900 font-serif">3-Year Vision</h3>
                 </div>
                 <p className="text-gray-700 leading-relaxed text-sm">
-                  Become the global standard for private, intelligent, on-chain collaboration, 
-                  leading the enterprise market and fostering a multi-chain AI agent marketplace.
+                  Become the standard bridge between privacy coins and DeFi, expanding 
+                  to additional chains and establishing enterprise partnerships globally.
                 </p>
               </CardContent>
             </Card>
@@ -191,7 +190,7 @@ const Index = () => {
       <section className="py-12 sm:py-16 bg-slate-900">
         <div className="container mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 font-serif">
-            The Future is Collaborative. Let's Build It Together.
+            The Bridge is Built. Join the Revolution.
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -206,9 +205,9 @@ const Index = () => {
               variant="outline" 
               size="lg" 
               className="btn-secondary px-8 py-4 text-lg"
-              onClick={() => window.location.href = '/enterprise'}
+              onClick={() => window.location.href = '/cashdapp'}
             >
-              Explore Enterprise Solutions
+              Try CashDapp Portal
             </Button>
           </div>
         </div>

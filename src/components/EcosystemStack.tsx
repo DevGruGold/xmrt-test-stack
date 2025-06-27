@@ -8,31 +8,31 @@ const EcosystemStack = () => {
     {
       id: 5,
       title: "Enterprise API Layer",
-      description: "Unlocking AI productivity for the world's leading companies.",
+      description: "Cross-chain bridging, Layer2 integration, and enterprise-grade staking infrastructure.",
       color: "bg-amber-100 border-amber-200",
       textColor: "text-amber-700",
       link: "/enterprise"
     },
     {
       id: 4,
-      title: "AI Agents",
-      description: "Autonomous cognitive power that thinks and acts for you.",
+      title: "AI-Governed Protocol",
+      description: "Multi-AI role system with CEO, CFO, CTO, and Compliance AI managing protocol operations.",
       color: "bg-purple-100 border-purple-200",
       textColor: "text-purple-700",
       link: "/ai-agents"
     },
     {
       id: 3,
-      title: "XMRT Devices",
-      description: "Smart glasses and headphones for seamless real-world interaction.",
+      title: "NFC Smart Cards & Devices",
+      description: "Biometric-secured NFC registration with NFT debit cards for real-world payments.",
       color: "bg-blue-100 border-blue-200",
       textColor: "text-blue-700",
       link: "/devices"
     },
     {
       id: 2,
-      title: "CashDapp",
-      description: "Your portal to Web3 mining, staking, and DeFi.",
+      title: "CashDapp with Multi-Chain Bridge",
+      description: "KYC-compliant fiat on/off ramp with Polygon/Avalanche bridging and offline transactions.",
       color: "bg-green-100 border-green-200",
       textColor: "text-green-700",
       link: "/cashdapp"
@@ -40,7 +40,7 @@ const EcosystemStack = () => {
     {
       id: 1,
       title: "XMRT Token + DAO",
-      description: "The foundation for on-chain identity and governance.",
+      description: "Upgradeable ERC20/ERC721 hybrid with XMR conversion, staking rewards, and governance.",
       color: "bg-indigo-100 border-indigo-200",
       textColor: "text-indigo-700",
       link: "/token-dao"
@@ -76,15 +76,15 @@ const EcosystemStack = () => {
       
       <div className="text-center mt-8">
         <p className="text-gray-600 mb-4 text-sm sm:text-base">
-          Each layer builds upon the foundation below, creating a comprehensive ecosystem 
-          for the future of intelligent collaboration.
+          Each layer builds upon a fully deployed, upgradeable smart contract with 
+          live XMR conversion, multi-chain bridging, and AI governance capabilities.
         </p>
         <Button 
           variant="outline" 
           className="btn-secondary"
           onClick={() => window.location.href = '/token-dao'}
         >
-          Start with Layer 1: XMRT Token
+          Explore Live Smart Contract
           <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>
