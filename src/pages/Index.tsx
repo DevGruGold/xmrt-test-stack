@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, ChevronDown, Building2, Users, TrendingUp, Shield, Zap, Globe, CheckCircle } from "lucide-react";
+import { ArrowRight, ChevronDown, Building2, Users, TrendingUp, Shield, Zap, Globe, CheckCircle, Cpu, Smartphone, Coins } from "lucide-react";
 import Footer from "@/components/Footer";
 import EcosystemStack from "@/components/EcosystemStack";
 import { useState, useEffect } from "react";
@@ -89,6 +89,27 @@ const Index = () => {
     }
   ];
 
+  const xmrAdvantages = [
+    {
+      icon: Cpu,
+      title: "CPU & GPU Mining",
+      description: "RandomX algorithm enables efficient mining on personal computers",
+      highlight: "No ASICs Required"
+    },
+    {
+      icon: Smartphone,
+      title: "Mobile Mining Capable",
+      description: "Only major cryptocurrency with trading value mineable on smartphones",
+      highlight: "True Decentralization"
+    },
+    {
+      icon: Coins,
+      title: "Privacy by Design",
+      description: "Complete transaction privacy with ring signatures and stealth addresses",
+      highlight: "Untraceable Transfers"
+    }
+  ];
+
   const stats = [
     { value: `${animatedStats[0]}M`, label: "Max XMRT Supply", color: "text-blue-600" },
     { value: `${animatedStats[1]} Days`, label: "Min Staking Period", color: "text-green-600" },
@@ -170,18 +191,71 @@ const Index = () => {
               variant="outline" 
               size="lg" 
               className="border-2 border-slate-300 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 px-6 py-4 sm:px-10 sm:py-6 text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
-              onClick={() => scrollToSection('ecosystem')}
+              onClick={() => scrollToSection('why-xmr')}
             >
-              Explore Live Protocol
+              Why XMR Matters
             </Button>
           </div>
         </div>
         
         <div 
           className="absolute bottom-6 sm:bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer z-10"
-          onClick={() => scrollToSection('features')}
+          onClick={() => scrollToSection('why-xmr')}
         >
           <ChevronDown className="h-8 w-8 sm:h-10 sm:w-10 text-slate-400 hover:text-blue-600 transition-colors duration-300" />
+        </div>
+      </section>
+
+      {/* Why XMR Section */}
+      <section id="why-xmr" className="py-12 sm:py-20 bg-gradient-to-b from-white to-slate-50">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 font-serif px-2">
+              Why XMR is Unique: The RandomX Advantage
+            </h2>
+            <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto px-4 leading-relaxed">
+              Monero (XMR) is the only cryptocurrency with real trading value that you can efficiently mine 
+              on your personal computer or smartphone. The RandomX algorithm ensures true decentralization 
+              by making ASIC mining unprofitable, keeping mining power in the hands of everyday users.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10 max-w-7xl mx-auto mb-12">
+            {xmrAdvantages.map((advantage, index) => (
+              <Card 
+                key={index}
+                className={`bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-4 group ${isVisible ? 'animate-fade-in' : ''}`}
+                style={{ animationDelay: `${index * 200}ms` }}
+              >
+                <CardContent className="p-6 sm:p-10 text-center">
+                  <div className="mb-6 sm:mb-8">
+                    <advantage.icon className="h-12 w-12 sm:h-16 sm:w-16 text-green-600 mx-auto group-hover:scale-125 transition-transform duration-500" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 font-serif">{advantage.title}</h3>
+                  <p className="text-gray-700 mb-4 sm:mb-6 leading-relaxed text-base sm:text-lg">{advantage.description}</p>
+                  <div className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-green-50 text-green-700 rounded-full text-xs sm:text-sm font-semibold border border-green-200">
+                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
+                    {advantage.highlight}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="max-w-4xl mx-auto text-center bg-gradient-to-r from-blue-50 to-purple-50 p-6 sm:p-10 rounded-2xl border border-blue-200">
+            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6 font-serif">
+              The Problem: XMR is Locked Out of DeFi
+            </h3>
+            <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6">
+              Despite XMR's revolutionary mining accessibility and privacy features, holders have been unable to 
+              participate in DeFi protocols due to regulatory compliance challenges and technical barriers. 
+              This means missing out on staking rewards, yield farming, and other DeFi opportunities.
+            </p>
+            <div className="inline-flex items-center px-4 py-3 bg-blue-600 text-white rounded-full text-sm sm:text-lg font-semibold">
+              <Zap className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
+              XMRT Solves This With Our Live Bridge Protocol
+            </div>
+          </div>
         </div>
       </section>
 
@@ -190,10 +264,10 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 font-serif px-2">
-              Real Technology. Proven Results.
+              XMRT: Bringing XMR to DeFi
             </h2>
             <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-              Our smart contract is live and operational with verified features
+              Our smart contract is live and operational with verified features that bridge the gap
             </p>
           </div>
           
@@ -226,40 +300,50 @@ const Index = () => {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-5xl mx-auto text-center">
             <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-8 sm:mb-12 font-serif px-2">
-              Bridging Privacy Coins to DeFi Innovation
+              From Mining on Your Phone to DeFi Yields
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 items-center">
               <div className="text-left px-4">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-4 sm:mb-6">The Challenge</h3>
+                <h3 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-4 sm:mb-6">The Opportunity</h3>
                 <p className="text-gray-700 leading-relaxed mb-6 sm:mb-8 text-base sm:text-lg">
-                  XMR holders have been locked out of DeFi due to privacy features that exchanges 
-                  can't handle, missing out on staking, lending, and yield opportunities.
+                  XMR is the only cryptocurrency with real trading value that everyday users can mine 
+                  using their existing devices. This creates a unique opportunity for true financial 
+                  democratization—but only if XMR can access DeFi.
                 </p>
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-center text-red-600">
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 bg-red-600 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
-                    <span className="text-base sm:text-lg">Limited DeFi access for privacy coins</span>
+                  <div className="flex items-center text-green-600">
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
+                    <span className="text-base sm:text-lg">Mine on PC, laptop, or smartphone</span>
                   </div>
-                  <div className="flex items-center text-red-600">
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 bg-red-600 rounded-full mr-3 sm:mr-4 flex-shrink-0"></div>
-                    <span className="text-base sm:text-lg">Regulatory compliance barriers</span>
+                  <div className="flex items-center text-green-600">
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
+                    <span className="text-base sm:text-lg">Complete transaction privacy</span>
+                  </div>
+                  <div className="flex items-center text-green-600">
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
+                    <span className="text-base sm:text-lg">ASIC-resistant algorithm</span>
                   </div>
                 </div>
               </div>
               <div className="text-left px-4">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-4 sm:mb-6">Our Solution</h3>
+                <h3 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-4 sm:mb-6">XMRT Solution</h3>
                 <p className="text-gray-700 leading-relaxed mb-6 sm:mb-8 text-base sm:text-lg">
                   Our protocol provides oracle-verified XMR conversion with KYC compliance, 
-                  multi-chain bridging, and AI governance—bringing privacy coins into DeFi.
+                  multi-chain bridging, and AI governance—bringing the power of XMR mining 
+                  directly into the DeFi ecosystem.
                 </p>
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-center text-green-600">
+                  <div className="flex items-center text-blue-600">
                     <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
                     <span className="text-base sm:text-lg">Live smart contract with proven utility</span>
                   </div>
-                  <div className="flex items-center text-green-600">
+                  <div className="flex items-center text-blue-600">
                     <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
                     <span className="text-base sm:text-lg">Multi-chain bridging & AI governance</span>
+                  </div>
+                  <div className="flex items-center text-blue-600">
+                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
+                    <span className="text-base sm:text-lg">Mine XMR → Convert to XMRT → Earn DeFi yields</span>
                   </div>
                 </div>
               </div>
@@ -339,10 +423,10 @@ const Index = () => {
       <section className="py-16 sm:py-24 bg-gradient-to-r from-slate-900 via-blue-900 to-purple-900">
         <div className="container mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6 sm:mb-8 font-serif px-2">
-            The Bridge is Built. Join the Revolution.
+            From Your Phone to DeFi: The Future is Here
           </h2>
           <p className="text-lg sm:text-2xl text-gray-200 mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
-            Experience the future of privacy coin integration with our live protocol
+            Join the only protocol that bridges mineable privacy coins to DeFi yields
           </p>
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
             <Button 
