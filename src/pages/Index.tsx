@@ -137,7 +137,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Protocol Demos Section - Mobile Optimized */}
+      {/* Protocol Demonstrations Section - Mobile Optimized */}
       <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 sm:mb-16">
@@ -161,17 +161,22 @@ const Index = () => {
                   Technical demonstration of XMRT's privacy-first payment infrastructure. 
                   Showcases zero-knowledge transactions and instant settlement capabilities.
                 </p>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex flex-col gap-4">
                   <a 
                     href="https://coldcash.vercel.app" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center text-primary hover:text-primary/80 font-semibold text-sm sm:text-base"
                   >
-                    View Demo <ExternalLink className="ml-2 h-4 w-4" />
+                    View Technical Demo <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
-                  <Button variant="outline" size="sm" onClick={() => window.location.href = '/invest'}>
-                    Investment Details
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => window.location.href = '/invest'}
+                    className="w-full"
+                  >
+                    Investment Opportunity
                   </Button>
                 </div>
               </CardContent>
@@ -187,17 +192,22 @@ const Index = () => {
                   Proof-of-concept for XMRT's fiat-crypto bridge infrastructure. 
                   Demonstrates seamless onramp/offramp with privacy preservation.
                 </p>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex flex-col gap-4">
                   <a 
                     href="https://pipuente.vercel.app" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="flex items-center text-accent hover:text-accent/80 font-semibold text-sm sm:text-base"
                   >
-                    View Demo <ExternalLink className="ml-2 h-4 w-4" />
+                    View Technical Demo <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
-                  <Button variant="outline" size="sm" onClick={() => window.location.href = '/invest'}>
-                    Investment Details
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    onClick={() => window.location.href = '/invest'}
+                    className="w-full"
+                  >
+                    Investment Opportunity
                   </Button>
                 </div>
               </CardContent>
