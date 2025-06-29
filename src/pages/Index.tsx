@@ -44,92 +44,92 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
       
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Hero Section - Improved Mobile */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20">
         {/* Animated background */}
         <div className="absolute inset-0 grid-pattern opacity-30"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
         
-        <div className={`container mx-auto px-6 text-center relative z-10 max-w-6xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <div className="mb-6">
-            <span className="inline-block px-6 py-3 bg-primary/20 text-primary rounded-full text-lg font-semibold mb-6 animate-pulse-glow border border-primary/30">
+        <div className={`container mx-auto px-4 sm:px-6 text-center relative z-10 max-w-6xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div className="mb-4 sm:mb-6">
+            <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-primary/20 text-primary rounded-full text-sm sm:text-lg font-semibold mb-4 sm:mb-6 animate-pulse-glow border border-primary/30">
               🚀 Smart Contract Live on Mainnet
             </span>
           </div>
           
-          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-8 leading-tight">
-            <span className="block mb-4">Private Finance.</span>
+          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight px-2">
+            <span className="block mb-2 sm:mb-4">Private Finance.</span>
             <span className="block xmrt-gradient-text animate-float">Public Power.</span>
           </h1>
           
-          <p className="text-xl sm:text-2xl text-muted-foreground mb-10 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 sm:mb-10 max-w-4xl mx-auto leading-relaxed px-2">
             XMRT is a privacy-first DeFi protocol with AI-enhanced DAO governance, 
             built on Monero's principles for the next generation of decentralized finance.
           </p>
 
-          {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12 max-w-2xl mx-auto">
+          {/* Stats - Mobile Optimized */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
             {stats.map((stat, index) => (
               <div 
                 key={index}
-                className={`text-center p-6 xmrt-card hover-lift ${isVisible ? 'animate-fade-in-up' : ''}`}
+                className={`text-center p-4 sm:p-6 xmrt-card hover-lift ${isVisible ? 'animate-fade-in-up' : ''}`}
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className={`text-3xl sm:text-4xl font-bold ${stat.color} mb-2`}>{stat.value}</div>
-                <p className="text-muted-foreground font-medium">{stat.label}</p>
+                <div className={`text-2xl sm:text-3xl md:text-4xl font-bold ${stat.color} mb-2`}>{stat.value}</div>
+                <p className="text-muted-foreground font-medium text-sm sm:text-base">{stat.label}</p>
               </div>
             ))}
           </div>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+          {/* CTA Buttons - Mobile Optimized */}
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 px-4">
             <Button 
               size="lg" 
-              className="xmrt-gradient text-black px-10 py-6 text-xl font-bold shadow-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 rounded-xl"
+              className="xmrt-gradient text-black px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl font-bold shadow-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
               onClick={() => window.location.href = '/dao'}
             >
               Join the DAO
-              <ArrowRight className="ml-3 h-6 w-6" />
+              <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-black px-10 py-6 text-xl font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-black px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
               onClick={() => window.location.href = '/invest'}
             >
               View Investment
-              <Vote className="ml-3 h-6 w-6" />
+              <Vote className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Protocol Features Section */}
-      <section className="py-20 bg-card/30">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+      {/* Protocol Features Section - Mobile Optimized */}
+      <section className="py-16 sm:py-20 bg-card/30">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
               The XMRT Protocol
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
               A comprehensive DeFi infrastructure combining privacy, governance, 
               and artificial intelligence for institutional-grade decentralized finance.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10 max-w-6xl mx-auto px-4">
             {features.map((feature, index) => (
               <Card 
                 key={index}
                 className={`xmrt-card hover-lift group ${isVisible ? 'animate-fade-in-up' : ''}`}
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <CardContent className="p-8 text-center">
-                  <div className="mb-6">
-                    <feature.icon className={`h-16 w-16 ${feature.color} mx-auto group-hover:scale-125 transition-transform duration-500`} />
+                <CardContent className="p-6 sm:p-8 text-center">
+                  <div className="mb-4 sm:mb-6">
+                    <feature.icon className={`h-12 w-12 sm:h-16 sm:w-16 ${feature.color} mx-auto group-hover:scale-125 transition-transform duration-500`} />
                   </div>
-                  <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+                  <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -137,36 +137,36 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Protocol Demos Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+      {/* Protocol Demos Section - Mobile Optimized */}
+      <section className="py-16 sm:py-20">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
               Protocol Demonstrations
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
               Live proof-of-concept applications showcasing XMRT protocol capabilities 
               for institutional investors and strategic partners.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 max-w-5xl mx-auto px-4">
             <Card className="xmrt-card hover-lift group">
-              <CardContent className="p-8">
+              <CardContent className="p-6 sm:p-8">
                 <div className="flex items-center mb-4">
-                  <Shield className="h-8 w-8 text-primary mr-3" />
-                  <h3 className="text-2xl font-bold">Payment Protocol Demo</h3>
+                  <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-primary mr-3" />
+                  <h3 className="text-xl sm:text-2xl font-bold">Payment Protocol Demo</h3>
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base">
                   Technical demonstration of XMRT's privacy-first payment infrastructure. 
                   Showcases zero-knowledge transactions and instant settlement capabilities.
                 </p>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <a 
                     href="https://coldcash.vercel.app" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center text-primary hover:text-primary/80 font-semibold"
+                    className="flex items-center text-primary hover:text-primary/80 font-semibold text-sm sm:text-base"
                   >
                     View Demo <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
@@ -178,21 +178,21 @@ const Index = () => {
             </Card>
 
             <Card className="xmrt-card hover-lift group">
-              <CardContent className="p-8">
+              <CardContent className="p-6 sm:p-8">
                 <div className="flex items-center mb-4">
-                  <Zap className="h-8 w-8 text-accent mr-3" />
-                  <h3 className="text-2xl font-bold">Bridge Protocol Demo</h3>
+                  <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-accent mr-3" />
+                  <h3 className="text-xl sm:text-2xl font-bold">Bridge Protocol Demo</h3>
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <p className="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base">
                   Proof-of-concept for XMRT's fiat-crypto bridge infrastructure. 
                   Demonstrates seamless onramp/offramp with privacy preservation.
                 </p>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                   <a 
                     href="https://pipuente.vercel.app" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="flex items-center text-accent hover:text-accent/80 font-semibold"
+                    className="flex items-center text-accent hover:text-accent/80 font-semibold text-sm sm:text-base"
                   >
                     View Demo <ExternalLink className="ml-2 h-4 w-4" />
                   </a>
@@ -206,40 +206,40 @@ const Index = () => {
         </div>
       </section>
 
-      {/* DAO Governance Section */}
-      <section className="py-20 bg-card/30">
-        <div className="container mx-auto px-6">
+      {/* DAO Governance Section - Mobile Optimized */}
+      <section className="py-16 sm:py-20 bg-card/30">
+        <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
               AI-Enhanced DAO Governance
             </h2>
-            <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
+            <p className="text-lg sm:text-xl text-muted-foreground mb-8 sm:mb-12 leading-relaxed px-4">
               XMRT's governance system combines community voting with AI oversight, 
               ensuring proposals meet technical, economic, and strategic criteria.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12 px-4">
               <div className="text-center">
-                <Vote className="h-12 w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Token-Weighted Voting</h3>
+                <Vote className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">Token-Weighted Voting</h3>
                 <p className="text-muted-foreground text-sm">Stake XMRT tokens to participate in protocol governance</p>
               </div>
               <div className="text-center">
-                <Brain className="h-12 w-12 text-accent mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">AI Proposal Analysis</h3>
+                <Brain className="h-10 w-10 sm:h-12 sm:w-12 text-accent mx-auto mb-4" />
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">AI Proposal Analysis</h3>
                 <p className="text-muted-foreground text-sm">5 specialized AI roles evaluate all governance proposals</p>
               </div>
               <div className="text-center">
-                <Users className="h-12 w-12 text-green-400 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Community Quorum</h3>
+                <Users className="h-10 w-10 sm:h-12 sm:w-12 text-green-400 mx-auto mb-4" />
+                <h3 className="text-lg sm:text-xl font-semibold mb-2">Community Quorum</h3>
                 <p className="text-muted-foreground text-sm">30% participation threshold for decision validity</p>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
               <Button 
                 size="lg" 
-                className="xmrt-gradient text-black font-semibold px-8 py-4 hover:opacity-90"
+                className="xmrt-gradient text-black font-semibold px-6 sm:px-8 py-4 hover:opacity-90 w-full sm:w-auto"
                 onClick={() => window.location.href = '/dao'}
               >
                 Explore DAO Structure
@@ -247,7 +247,7 @@ const Index = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-primary text-primary hover:bg-primary hover:text-black px-8 py-4"
+                className="border-primary text-primary hover:bg-primary hover:text-black px-6 sm:px-8 py-4 w-full sm:w-auto"
                 onClick={() => window.location.href = '/invest'}
               >
                 Investment Opportunity
@@ -257,33 +257,33 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="py-20 bg-gradient-to-br from-primary/20 via-background to-accent/20">
-        <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+      {/* Final CTA - Mobile Optimized */}
+      <section className="py-16 sm:py-20 bg-gradient-to-br from-primary/20 via-background to-accent/20">
+        <div className="container mx-auto px-4 sm:px-6 text-center">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
             Join the Future of Private Finance
           </h2>
-          <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
             XMRT is building the infrastructure for privacy-first DeFi. 
             Participate in governance, explore our protocol, or learn about investment opportunities.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
             <Button 
               size="lg" 
-              className="xmrt-gradient text-black font-bold px-10 py-6 text-xl hover:opacity-90 transform hover:scale-105 transition-all duration-300"
+              className="xmrt-gradient text-black font-bold px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl hover:opacity-90 transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
               onClick={() => window.location.href = '/dao'}
             >
               Vote with XMRT
-              <ArrowRight className="ml-3 h-6 w-6" />
+              <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-white text-white hover:bg-white hover:text-black px-10 py-6 text-xl font-semibold transform hover:scale-105 transition-all duration-300"
+              className="border-white text-white hover:bg-white hover:text-black px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
               onClick={() => window.location.href = '/about'}
             >
               Meet the Founder
-              <Github className="ml-3 h-6 w-6" />
+              <Github className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
             </Button>
           </div>
         </div>
