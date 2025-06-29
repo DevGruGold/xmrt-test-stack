@@ -1,293 +1,157 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, ChevronDown, Building2, Users, TrendingUp, Shield, Zap, Globe, CheckCircle, Cpu, Smartphone, Coins } from "lucide-react";
+import { ArrowRight, Shield, Zap, Users, Vote, Wallet, Nfc, Play, ExternalLink, Github } from "lucide-react";
+import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import EcosystemStack from "@/components/EcosystemStack";
 import { useState, useEffect } from "react";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeSection, setActiveSection] = useState(0);
-  const [animatedStats, setAnimatedStats] = useState([0, 0, 0]);
 
   useEffect(() => {
     setIsVisible(true);
-    
-    // Animate stats on load
-    const statsTargets = [21, 7, 30];
-    const duration = 2000;
-    const steps = 60;
-    const stepDuration = duration / steps;
-    
-    let currentStep = 0;
-    const interval = setInterval(() => {
-      currentStep++;
-      const progress = currentStep / steps;
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      
-      setAnimatedStats([
-        Math.round(statsTargets[0] * easeOut),
-        Math.round(statsTargets[1] * easeOut),
-        Math.round(statsTargets[2] * easeOut)
-      ]);
-      
-      if (currentStep >= steps) {
-        clearInterval(interval);
-      }
-    }, stepDuration);
-    
-    const handleScroll = () => {
-      const sections = document.querySelectorAll('section');
-      const scrollPosition = window.scrollY + 100;
-      
-      sections.forEach((section, index) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          setActiveSection(index);
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearInterval(interval);
-    };
   }, []);
 
-  const scrollToSection = (elementId: string) => {
-    const element = document.getElementById(elementId);
-    if (element) {
-      element.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-    }
-  };
-
-  const keyFeatures = [
+  const features = [
     {
       icon: Shield,
-      title: "Oracle-Verified XMR Conversion",
-      description: "EIP-712 signature verification with live smart contract",
-      highlight: "21M Max Supply"
+      title: "Privacy-First DeFi",
+      description: "Built on Monero principles with complete transaction privacy and decentralized governance.",
+      color: "text-primary"
+    },
+    {
+      icon: Vote,
+      title: "AI-Enhanced DAO",
+      description: "Role-based voting with AI proposal approval and automated treasury management.",
+      color: "text-accent"
     },
     {
       icon: Zap,
-      title: "Multi-Chain Bridging",
-      description: "Polygon/Avalanche integration with Layer2 scaling",
-      highlight: "Cross-Chain Ready"
-    },
-    {
-      icon: Globe,
-      title: "AI-Governed DAO",
-      description: "5 AI roles managing treasury and protocol upgrades",
-      highlight: "30% Quorum"
-    }
-  ];
-
-  const xmrAdvantages = [
-    {
-      icon: Cpu,
-      title: "CPU & GPU Mining",
-      description: "RandomX algorithm enables efficient mining on personal computers",
-      highlight: "No ASICs Required"
-    },
-    {
-      icon: Smartphone,
-      title: "Mobile Mining Capable",
-      description: "Only major cryptocurrency with trading value mineable on smartphones",
-      highlight: "True Decentralization"
-    },
-    {
-      icon: Coins,
-      title: "Privacy by Design",
-      description: "Complete transaction privacy with ring signatures and stealth addresses",
-      highlight: "Untraceable Transfers"
+      title: "Live dApps",
+      description: "XMRT Pay and XMRT Bridge are deployed and operational with real users.",
+      color: "text-green-400"
     }
   ];
 
   const stats = [
-    { value: `${animatedStats[0]}M`, label: "Max XMRT Supply", color: "text-blue-600" },
-    { value: `${animatedStats[1]} Days`, label: "Min Staking Period", color: "text-green-600" },
-    { value: `${animatedStats[2]}%`, label: "DAO Quorum", color: "text-purple-600" }
+    { value: "21M", label: "Max Supply", color: "text-primary" },
+    { value: "5", label: "AI Roles", color: "text-accent" },
+    { value: "30%", label: "DAO Quorum", color: "text-green-400" }
   ];
 
   return (
-    <div className="min-h-screen bg-white scroll-smooth">
+    <div className="min-h-screen bg-background text-foreground">
+      <Navigation />
+      
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background with parallax effect */}
-        <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80" 
-            alt="AI and blockchain technology"
-            className="w-full h-full object-cover opacity-10 transform scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/98 via-white/95 to-white/98"></div>
-        </div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        {/* Animated background */}
+        <div className="absolute inset-0 grid-pattern opacity-30"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
         
-        <div className={`container mx-auto px-4 sm:px-6 text-center relative z-10 max-w-6xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          {/* Navigation in hero */}
-          <div className="absolute top-4 sm:top-8 right-4 sm:right-8 flex items-center space-x-2 sm:space-x-6 z-20">
-            <a href="/token-dao" className="hidden sm:inline text-slate-700 hover:text-slate-900 font-medium transition-colors text-sm sm:text-base">Token & DAO</a>
-            <a href="/cashdapp" className="hidden sm:inline text-slate-700 hover:text-slate-900 font-medium transition-colors text-sm sm:text-base">CashDapp</a>
-            <a href="/enterprise" className="hidden sm:inline text-slate-700 hover:text-slate-900 font-medium transition-colors text-sm sm:text-base">Enterprise</a>
-            <Button 
-              size="sm"
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white text-xs sm:text-sm px-3 py-2 sm:px-4 sm:py-2"
-              onClick={() => window.location.href = '/invest'}
-            >
-              Invest Now
-            </Button>
-          </div>
-
-          <div className="mb-4 sm:mb-6 mt-16 sm:mt-0">
-            <span className="inline-block px-3 py-2 sm:px-6 sm:py-3 bg-blue-50 text-blue-700 rounded-full text-sm sm:text-lg font-semibold mb-4 sm:mb-6 animate-pulse border border-blue-200">
-              🚀 Live Smart Contract on Sepolia Testnet
+        <div className={`container mx-auto px-6 text-center relative z-10 max-w-6xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div className="mb-6">
+            <span className="inline-block px-6 py-3 bg-primary/20 text-primary rounded-full text-lg font-semibold mb-6 animate-pulse-glow border border-primary/30">
+              🚀 Smart Contract Live on Mainnet
             </span>
           </div>
           
-          <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-slate-900 mb-6 sm:mb-8 leading-tight font-serif px-2">
-            <span className="block mb-2 sm:mb-4">XMR to DeFi Bridge</span>
-            <span className="block text-transparent bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text">
-              With AI Governance
-            </span>
+          <h1 className="text-4xl sm:text-6xl md:text-8xl font-bold mb-8 leading-tight">
+            <span className="block mb-4">Private Finance.</span>
+            <span className="block xmrt-gradient-text animate-float">Public Power.</span>
           </h1>
           
-          <p className="text-lg sm:text-2xl text-slate-700 mb-8 sm:mb-10 max-w-4xl mx-auto leading-relaxed font-light px-4">
-            Live protocol converting XMR to XMRT with oracle verification, 
-            cross-chain bridging, biometric NFC security, and autonomous AI governance.
+          <p className="text-xl sm:text-2xl text-muted-foreground mb-10 max-w-4xl mx-auto leading-relaxed">
+            XMRT is a privacy-first DeFi platform with DAO governance, AI oversight, 
+            and live decentralized applications for payments and fiat bridging.
           </p>
 
-          {/* Interactive Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 mb-8 sm:mb-10 max-w-3xl mx-auto px-4">
+          {/* Stats */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12 max-w-2xl mx-auto">
             {stats.map((stat, index) => (
               <div 
                 key={index}
-                className={`text-center p-4 sm:p-6 rounded-xl bg-white/90 backdrop-blur-sm border border-gray-200 hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 ${isVisible ? 'animate-fade-in' : ''}`}
-                style={{ animationDelay: `${index * 300}ms` }}
+                className={`text-center p-6 xmrt-card hover-lift ${isVisible ? 'animate-fade-in-up' : ''}`}
+                style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className={`text-2xl sm:text-4xl font-bold ${stat.color} mb-1 sm:mb-2`}>{stat.value}</div>
-                <p className="text-slate-600 font-medium text-sm sm:text-base">{stat.label}</p>
+                <div className={`text-3xl sm:text-4xl font-bold ${stat.color} mb-2`}>{stat.value}</div>
+                <p className="text-muted-foreground font-medium">{stat.label}</p>
               </div>
             ))}
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-8 sm:mb-12 px-4">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-4 sm:px-10 sm:py-6 text-lg sm:text-xl font-semibold shadow-lg transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
-              onClick={() => window.location.href = '/invest'}
+              className="xmrt-gradient text-black px-10 py-6 text-xl font-bold shadow-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 rounded-xl"
+              onClick={() => window.location.href = '/dao'}
             >
-              View Investment Details
-              <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
+              Join the DAO
+              <ArrowRight className="ml-3 h-6 w-6" />
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-2 border-slate-300 hover:border-blue-600 hover:text-blue-600 hover:bg-blue-50 px-6 py-4 sm:px-10 sm:py-6 text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
-              onClick={() => scrollToSection('why-xmr')}
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-black px-10 py-6 text-xl font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl"
+              onClick={() => window.location.href = '/apps'}
             >
-              Why XMR Matters
+              Try Our Apps
+              <Play className="ml-3 h-6 w-6" />
             </Button>
           </div>
-        </div>
-        
-        <div 
-          className="absolute bottom-6 sm:bottom-12 left-1/2 transform -translate-x-1/2 animate-bounce cursor-pointer z-10"
-          onClick={() => scrollToSection('why-xmr')}
-        >
-          <ChevronDown className="h-8 w-8 sm:h-10 sm:w-10 text-slate-400 hover:text-blue-600 transition-colors duration-300" />
-        </div>
-      </section>
 
-      {/* Why XMR Section */}
-      <section id="why-xmr" className="py-12 sm:py-20 bg-gradient-to-b from-white to-slate-50">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 font-serif px-2">
-              Why XMR is Unique: The RandomX Advantage
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-4xl mx-auto px-4 leading-relaxed">
-              Monero (XMR) is the only cryptocurrency with real trading value that you can efficiently mine 
-              on your personal computer or smartphone. The RandomX algorithm ensures true decentralization 
-              by making ASIC mining unprofitable, keeping mining power in the hands of everyday users.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10 max-w-7xl mx-auto mb-12">
-            {xmrAdvantages.map((advantage, index) => (
-              <Card 
-                key={index}
-                className={`bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-4 group ${isVisible ? 'animate-fade-in' : ''}`}
-                style={{ animationDelay: `${index * 200}ms` }}
-              >
-                <CardContent className="p-6 sm:p-10 text-center">
-                  <div className="mb-6 sm:mb-8">
-                    <advantage.icon className="h-12 w-12 sm:h-16 sm:w-16 text-green-600 mx-auto group-hover:scale-125 transition-transform duration-500" />
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 font-serif">{advantage.title}</h3>
-                  <p className="text-gray-700 mb-4 sm:mb-6 leading-relaxed text-base sm:text-lg">{advantage.description}</p>
-                  <div className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-green-50 text-green-700 rounded-full text-xs sm:text-sm font-semibold border border-green-200">
-                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                    {advantage.highlight}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="max-w-4xl mx-auto text-center bg-gradient-to-r from-blue-50 to-purple-50 p-6 sm:p-10 rounded-2xl border border-blue-200">
-            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-4 sm:mb-6 font-serif">
-              The Problem: XMR is Locked Out of DeFi
-            </h3>
-            <p className="text-base sm:text-lg text-gray-700 leading-relaxed mb-6">
-              Despite XMR's revolutionary mining accessibility and privacy features, holders have been unable to 
-              participate in DeFi protocols due to regulatory compliance challenges and technical barriers. 
-              This means missing out on staking rewards, yield farming, and other DeFi opportunities.
-            </p>
-            <div className="inline-flex items-center px-4 py-3 bg-blue-600 text-white rounded-full text-sm sm:text-lg font-semibold">
-              <Zap className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
-              XMRT Solves This With Our Live Bridge Protocol
-            </div>
+          {/* Demo Links */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center text-sm">
+            <a 
+              href="https://coldcash.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center text-muted-foreground hover:text-primary transition-colors"
+            >
+              <ExternalLink className="h-4 w-4 mr-2" />
+              Live Demo: XMRT Pay
+            </a>
+            <a 
+              href="https://pipuente.vercel.app" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center text-muted-foreground hover:text-primary transition-colors"
+            >
+              <ExternalLink className="h-4 w-4 mr-2" />
+              Live Demo: XMRT Bridge
+            </a>
           </div>
         </div>
       </section>
 
-      {/* Key Features Section */}
-      <section id="features" className="py-12 sm:py-20 bg-gradient-to-b from-slate-50 to-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 font-serif px-2">
-              XMRT: Bringing XMR to DeFi
+      {/* Features Section */}
+      <section className="py-20 bg-card/30">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+              Built for Privacy. Powered by Community.
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-              Our smart contract is live and operational with verified features that bridge the gap
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              XMRT combines the privacy principles of Monero with modern DeFi governance 
+              and AI-enhanced decision making.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10 max-w-7xl mx-auto">
-            {keyFeatures.map((feature, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+            {features.map((feature, index) => (
               <Card 
                 key={index}
-                className={`bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-700 transform hover:-translate-y-4 group ${isVisible ? 'animate-fade-in' : ''}`}
+                className={`xmrt-card hover-lift group ${isVisible ? 'animate-fade-in-up' : ''}`}
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <CardContent className="p-6 sm:p-10 text-center">
-                  <div className="mb-6 sm:mb-8">
-                    <feature.icon className="h-12 w-12 sm:h-16 sm:w-16 text-blue-600 mx-auto group-hover:scale-125 transition-transform duration-500" />
+                <CardContent className="p-8 text-center">
+                  <div className="mb-6">
+                    <feature.icon className={`h-16 w-16 ${feature.color} mx-auto group-hover:scale-125 transition-transform duration-500`} />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-3 sm:mb-4 font-serif">{feature.title}</h3>
-                  <p className="text-gray-700 mb-4 sm:mb-6 leading-relaxed text-base sm:text-lg">{feature.description}</p>
-                  <div className="inline-flex items-center px-3 py-2 sm:px-4 sm:py-2 bg-blue-50 text-blue-700 rounded-full text-xs sm:text-sm font-semibold border border-blue-200">
-                    <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
-                    {feature.highlight}
-                  </div>
+                  <h3 className="text-2xl font-bold mb-4">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -295,155 +159,153 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Problem & Solution */}
-      <section className="py-12 sm:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="max-w-5xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-8 sm:mb-12 font-serif px-2">
-              From Mining on Your Phone to DeFi Yields
+      {/* Products Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+              Live Products. Real Users.
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-16 items-center">
-              <div className="text-left px-4">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-4 sm:mb-6">The Opportunity</h3>
-                <p className="text-gray-700 leading-relaxed mb-6 sm:mb-8 text-base sm:text-lg">
-                  XMR is the only cryptocurrency with real trading value that everyday users can mine 
-                  using their existing devices. This creates a unique opportunity for true financial 
-                  democratization—but only if XMR can access DeFi.
-                </p>
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-center text-green-600">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
-                    <span className="text-base sm:text-lg">Mine on PC, laptop, or smartphone</span>
-                  </div>
-                  <div className="flex items-center text-green-600">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
-                    <span className="text-base sm:text-lg">Complete transaction privacy</span>
-                  </div>
-                  <div className="flex items-center text-green-600">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
-                    <span className="text-base sm:text-lg">ASIC-resistant algorithm</span>
-                  </div>
-                </div>
-              </div>
-              <div className="text-left px-4">
-                <h3 className="text-2xl sm:text-3xl font-semibold text-slate-900 mb-4 sm:mb-6">XMRT Solution</h3>
-                <p className="text-gray-700 leading-relaxed mb-6 sm:mb-8 text-base sm:text-lg">
-                  Our protocol provides oracle-verified XMR conversion with KYC compliance, 
-                  multi-chain bridging, and AI governance—bringing the power of XMR mining 
-                  directly into the DeFi ecosystem.
-                </p>
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-center text-blue-600">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
-                    <span className="text-base sm:text-lg">Live smart contract with proven utility</span>
-                  </div>
-                  <div className="flex items-center text-blue-600">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
-                    <span className="text-base sm:text-lg">Multi-chain bridging & AI governance</span>
-                  </div>
-                  <div className="flex items-center text-blue-600">
-                    <CheckCircle className="h-4 w-4 sm:h-5 sm:w-5 mr-3 sm:mr-4 flex-shrink-0" />
-                    <span className="text-base sm:text-lg">Mine XMR → Convert to XMRT → Earn DeFi yields</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Ecosystem Overview */}
-      <section id="ecosystem" className="py-12 sm:py-20 bg-slate-50">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 font-serif px-2">
-              Deployed Smart Contract Architecture
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-              Five integrated layers built on our live, upgradeable smart contract
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Our decentralized applications are deployed and operational, 
+              serving real users with privacy-focused financial services.
             </p>
           </div>
-          <EcosystemStack />
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+            <Card className="xmrt-card hover-lift group">
+              <CardContent className="p-8">
+                <div className="flex items-center mb-4">
+                  <Wallet className="h-8 w-8 text-primary mr-3" />
+                  <h3 className="text-2xl font-bold">XMRT Pay</h3>
+                </div>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Peer-to-peer crypto payments with privacy-first design. 
+                  Send and receive payments instantly with complete anonymity.
+                </p>
+                <div className="flex items-center justify-between">
+                  <a 
+                    href="https://coldcash.vercel.app" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center text-primary hover:text-primary/80 font-semibold"
+                  >
+                    Try Live Demo <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                  <Button variant="outline" size="sm" onClick={() => window.location.href = '/apps'}>
+                    Learn More
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="xmrt-card hover-lift group">
+              <CardContent className="p-8">
+                <div className="flex items-center mb-4">
+                  <Nfc className="h-8 w-8 text-accent mr-3" />
+                  <h3 className="text-2xl font-bold">XMRT Bridge</h3>
+                </div>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Seamless fiat onramp and offramp tool for private transactions. 
+                  Bridge traditional finance with decentralized privacy.
+                </p>
+                <div className="flex items-center justify-between">
+                  <a 
+                    href="https://pipuente.vercel.app" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center text-accent hover:text-accent/80 font-semibold"
+                  >
+                    Try Live Demo <ExternalLink className="ml-2 h-4 w-4" />
+                  </a>
+                  <Button variant="outline" size="sm" onClick={() => window.location.href = '/apps'}>
+                    Learn More
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </section>
 
-      {/* Traction & Roadmap */}
-      <section className="py-12 sm:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-5xl font-bold text-slate-900 mb-4 sm:mb-6 font-serif px-2">
-              From Code to Market: Our Execution
+      {/* DAO Section */}
+      <section className="py-20 bg-card/30">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+              Governed by Community. Enhanced by AI.
             </h2>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10 max-w-7xl mx-auto">
-            <Card className="bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3">
-              <CardContent className="p-6 sm:p-8">
-                <div className="mb-4 sm:mb-6">
-                  <Building2 className="h-10 w-10 sm:h-12 sm:w-12 text-blue-600 mb-3 sm:mb-4" />
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-serif">Live & Deployed</h3>
-                </div>
-                <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
-                  Smart contract live on Sepolia with XMR conversion, multi-chain bridging, 
-                  AI governance, NFC security, and upgradeable architecture.
-                </p>
-              </CardContent>
-            </Card>
+            <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
+              XMRT's DAO features role-based voting, AI proposal approval, 
+              and automated treasury management for transparent governance.
+            </p>
             
-            <Card className="bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3">
-              <CardContent className="p-6 sm:p-8">
-                <div className="mb-4 sm:mb-6">
-                  <Users className="h-10 w-10 sm:h-12 sm:w-12 text-green-600 mb-3 sm:mb-4" />
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-serif">Next 12 Months</h3>
-                </div>
-                <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
-                  Polygon mainnet deployment, CashDapp public launch, enterprise pilots, 
-                  NFC debit card distribution, and full DAO activation.
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-white border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3">
-              <CardContent className="p-6 sm:p-8">
-                <div className="mb-4 sm:mb-6">
-                  <TrendingUp className="h-10 w-10 sm:h-12 sm:w-12 text-purple-600 mb-3 sm:mb-4" />
-                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-serif">3-Year Vision</h3>
-                </div>
-                <p className="text-gray-700 leading-relaxed text-base sm:text-lg">
-                  Become the standard bridge between privacy coins and DeFi, expanding 
-                  to additional chains and establishing global partnerships.
-                </p>
-              </CardContent>
-            </Card>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-12">
+              <div className="text-center">
+                <Vote className="h-12 w-12 text-primary mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Vote with XMRT</h3>
+                <p className="text-muted-foreground text-sm">Token-weighted governance with role-based permissions</p>
+              </div>
+              <div className="text-center">
+                <Shield className="h-12 w-12 text-accent mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">AI Oversight</h3>
+                <p className="text-muted-foreground text-sm">5 AI roles managing proposals and treasury</p>
+              </div>
+              <div className="text-center">
+                <Users className="h-12 w-12 text-green-400 mx-auto mb-4" />
+                <h3 className="text-xl font-semibold mb-2">30% Quorum</h3>
+                <p className="text-muted-foreground text-sm">Community-driven decision making</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="xmrt-gradient text-black font-semibold px-8 py-4 hover:opacity-90"
+                onClick={() => window.location.href = '/dao'}
+              >
+                Join the DAO
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-primary text-primary hover:bg-primary hover:text-black px-8 py-4"
+                onClick={() => window.location.href = '/invest'}
+              >
+                View Investment
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 sm:py-24 bg-gradient-to-r from-slate-900 via-blue-900 to-purple-900">
-        <div className="container mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl sm:text-5xl font-bold text-white mb-6 sm:mb-8 font-serif px-2">
-            From Your Phone to DeFi: The Future is Here
+      <section className="py-20 bg-gradient-to-br from-primary/20 via-background to-accent/20">
+        <div className="container mx-auto px-6 text-center">
+          <h2 className="text-4xl sm:text-5xl font-bold mb-6">
+            Ready to Build the Future of Finance?
           </h2>
-          <p className="text-lg sm:text-2xl text-gray-200 mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
-            Join the only protocol that bridges mineable privacy coins to DeFi yields
+          <p className="text-xl text-muted-foreground mb-12 max-w-3xl mx-auto">
+            Join the XMRT ecosystem today. Vote with your tokens, use our apps, 
+            and help shape the future of privacy-first DeFi.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-4 sm:px-10 sm:py-6 text-lg sm:text-xl shadow-lg transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
-              onClick={() => window.location.href = '/invest'}
+              className="xmrt-gradient text-black font-bold px-10 py-6 text-xl hover:opacity-90 transform hover:scale-105 transition-all duration-300"
+              onClick={() => window.location.href = '/dao'}
             >
-              Become an Early Investor
-              <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
+              Vote with XMRT
+              <ArrowRight className="ml-3 h-6 w-6" />
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-2 border-white text-white hover:bg-white hover:text-slate-900 px-6 py-4 sm:px-10 sm:py-6 text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
-              onClick={() => window.location.href = '/cashdapp'}
+              className="border-white text-white hover:bg-white hover:text-black px-10 py-6 text-xl font-semibold transform hover:scale-105 transition-all duration-300"
+              onClick={() => window.location.href = '/about'}
             >
-              Try CashDapp Portal
+              Meet the Founder
+              <Github className="ml-3 h-6 w-6" />
             </Button>
           </div>
         </div>
