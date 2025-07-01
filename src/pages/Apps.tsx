@@ -171,7 +171,7 @@ const Apps = () => {
               <div className="text-center p-6 xmrt-card">
                 <Shield className="h-12 w-12 text-primary mx-auto mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Smart Contract Security</h3>
-                <p className="text-muted-foreground text-sm">Deployed mainnet contracts with role-based access control and AI oversight</p>
+                <p className="text-muted-foreground text-sm">Deployed testnet contracts with role-based access control and AI oversight</p>
               </div>
               <div className="text-center p-6 xmrt-card">
                 <Zap className="h-12 w-12 text-accent mx-auto mb-4" />

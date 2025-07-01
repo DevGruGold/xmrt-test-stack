@@ -29,7 +29,7 @@ const Index = () => {
     {
       icon: Code,
       title: "Smart Contract Infrastructure",
-      description: "Deployed mainnet contracts with KYC thresholds, NFT mining, and on-chain governance.",
+      description: "Deployed testnet contracts with KYC thresholds, NFT mining, and on-chain governance.",
       color: "text-green-400"
     }
   ];
@@ -53,7 +53,7 @@ const Index = () => {
         <div className={`container mx-auto px-4 sm:px-6 text-center relative z-10 max-w-6xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
           <div className="mb-4 sm:mb-6">
             <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-primary/20 text-primary rounded-full text-sm sm:text-lg font-semibold mb-4 sm:mb-6 animate-pulse-glow border border-primary/30">
-              🚀 Smart Contract Live on Mainnet
+              🚀 Smart Contract Live on Sepolia Testnet
             </span>
           </div>
           
@@ -66,6 +66,22 @@ const Index = () => {
             XMRT is a privacy-first DeFi protocol with AI-enhanced DAO governance, 
             built on Monero's principles for the next generation of decentralized finance.
           </p>
+
+          {/* Contract Address Info */}
+          <div className="mb-8 sm:mb-12 px-4">
+            <div className="bg-card/50 rounded-xl p-4 sm:p-6 border border-white/10 max-w-2xl mx-auto">
+              <p className="text-sm text-muted-foreground mb-2">XMRT Token Contract (Sepolia Testnet):</p>
+              <a 
+                href="https://sepolia.etherscan.io/token/0x77307DFbc436224d5e6f2048d2b6bDfA66998a15"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:text-primary/80 font-mono text-sm break-all flex items-center justify-center gap-2"
+              >
+                0x77307DFbc436224d5e6f2048d2b6bDfA66998a15
+                <ExternalLink className="h-4 w-4 flex-shrink-0" />
+              </a>
+            </div>
+          </div>
 
           {/* Stats - Mobile Optimized */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
