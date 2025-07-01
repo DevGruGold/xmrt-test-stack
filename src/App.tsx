@@ -11,9 +11,6 @@ import Invest from "./pages/Invest";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
-// Import Web3 configuration
-import "./config/web3";
-
 const queryClient = new QueryClient();
 
 const App = () => (

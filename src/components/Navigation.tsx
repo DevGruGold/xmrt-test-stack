@@ -3,7 +3,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Shield } from "lucide-react";
 import { useLocation } from "react-router-dom";
-import WalletConnect from "./WalletConnect";
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -65,11 +64,8 @@ const Navigation = () => {
             </button>
           </div>
 
-          {/* CTA Button, Wallet Connect and Mobile Menu */}
+          {/* CTA Button and Mobile Menu */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            <div className="hidden md:block">
-              <WalletConnect />
-            </div>
             <Button 
               className="hidden sm:inline-flex xmrt-gradient text-black font-semibold hover:opacity-90 text-sm px-4 py-2"
               onClick={() => handleNavClick('/dao')}
@@ -121,9 +117,6 @@ const Navigation = () => {
               >
                 About
               </button>
-              <div className="pt-2">
-                <WalletConnect />
-              </div>
               <Button 
                 className="xmrt-gradient text-black font-semibold w-full"
                 onClick={() => handleNavClick('/dao')}
