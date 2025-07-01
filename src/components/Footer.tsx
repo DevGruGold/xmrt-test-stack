@@ -1,15 +1,26 @@
 
-import { Shield, Github, Twitter, MessageCircle } from "lucide-react";
+import { Shield, Mail, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   const handleNavClick = (path: string) => {
     window.location.href = path;
   };
 
+  const handleEmailClick = () => {
+    const subject = encodeURIComponent("XMRT Inquiry");
+    const body = encodeURIComponent("Hello XMRT Team,\n\nI'm interested in learning more about XMRT and would like to discuss:\n\n- \n\nBest regards");
+    window.open(`mailto:xmrtsolutions@gmail.com?subject=${subject}&body=${body}`);
+  };
+
+  const handleWhatsAppClick = () => {
+    const message = encodeURIComponent("Hello XMRT Team! I'm interested in learning more about your DeFi platform and would like to discuss potential opportunities.");
+    window.open(`https://wa.me/50661500559?text=${message}`, '_blank');
+  };
+
   return (
     <footer className="bg-card/30 border-t border-white/10">
       <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {/* Brand */}
           <div className="space-y-4 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center space-x-2 sm:space-x-3 cursor-pointer" onClick={() => handleNavClick('/')}>
@@ -26,40 +37,9 @@ const Footer = () => {
             </p>
           </div>
           
-          {/* Navigation */}
+          {/* Quick Links */}
           <div>
             <h3 className="text-white font-semibold mb-4">Platform</h3>
-            <div className="space-y-2">
-              <button 
-                onClick={() => handleNavClick('/apps')}
-                className="block text-muted-foreground hover:text-primary transition-colors text-sm text-left"
-              >
-                XMRT Apps
-              </button>
-              <button 
-                onClick={() => handleNavClick('/dao')}
-                className="block text-muted-foreground hover:text-primary transition-colors text-sm text-left"
-              >
-                DAO Governance
-              </button>
-              <button 
-                onClick={() => handleNavClick('/invest')}
-                className="block text-muted-foreground hover:text-primary transition-colors text-sm text-left"
-              >
-                Investment
-              </button>
-              <button 
-                onClick={() => handleNavClick('/about')}
-                className="block text-muted-foreground hover:text-primary transition-colors text-sm text-left"
-              >
-                About
-              </button>
-            </div>
-          </div>
-          
-          {/* Products */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Products</h3>
             <div className="space-y-2">
               <a 
                 href="https://coldcash.vercel.app" 
@@ -80,32 +60,27 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Connect */}
+          {/* Contact */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Connect</h3>
-            <div className="flex space-x-4">
-              <a 
-                href="https://github.com/josephmlee" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+            <h3 className="text-white font-semibold mb-4">Contact Us</h3>
+            <div className="space-y-3">
+              <button 
+                onClick={handleEmailClick}
+                className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors text-sm group"
               >
-                <Github className="h-5 w-5" />
-              </a>
-              <a 
-                href="https://twitter.com/JoeLee_Defi" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
+                <Mail className="h-4 w-4" />
+                <span>Email Support</span>
+              </button>
+              <button 
+                onClick={handleWhatsAppClick}
+                className="flex items-center space-x-2 text-muted-foreground hover:text-primary transition-colors text-sm group"
               >
-                <Twitter className="h-5 w-5" />
-              </a>
-              <a 
-                href="mailto:joe@xmrt.net" 
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <MessageCircle className="h-5 w-5" />
-              </a>
+                <MessageCircle className="h-4 w-4" />
+                <span>WhatsApp</span>
+              </button>
+              <p className="text-xs text-muted-foreground">
+                For partnerships, support, or general inquiries
+              </p>
             </div>
           </div>
         </div>
