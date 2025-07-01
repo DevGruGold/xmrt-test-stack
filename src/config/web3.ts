@@ -17,8 +17,8 @@ const metadata = {
   icons: ['https://avatars.githubusercontent.com/u/37784886']
 }
 
-// 4. Create Ethers config
-const ethersConfig = EthersAdapter()
+// 4. Create Ethers config with new keyword
+const ethersConfig = new EthersAdapter()
 
 // 5. Create a AppKit instance
 createAppKit({
