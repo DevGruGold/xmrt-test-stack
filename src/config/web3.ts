@@ -1,13 +1,32 @@
 
 import { createAppKit } from '@reown/appkit/react'
 import { EthersAdapter } from '@reown/appkit-adapter-ethers'
-import { sepolia } from '@reown/appkit/networks'
 
 // 1. Get projectId from https://cloud.reown.com
 const projectId = '3c0e28ee15f49b20eebc46f23df5aa8e'
 
-// 2. Set the networks
-const networks = [sepolia]
+// 2. Set the networks - Define Sepolia testnet properly
+const networks = [{
+  id: 11155111,
+  name: 'Sepolia',
+  nativeCurrency: {
+    name: 'Sepolia Ether',
+    symbol: 'ETH',
+    decimals: 18
+  },
+  rpcUrls: {
+    default: {
+      http: ['https://sepolia.infura.io/v3/', 'https://rpc.sepolia.org']
+    }
+  },
+  blockExplorers: {
+    default: {
+      name: 'Etherscan',
+      url: 'https://sepolia.etherscan.io'
+    }
+  },
+  testnet: true
+}]
 
 // 3. Create a metadata object - optional
 const metadata = {
