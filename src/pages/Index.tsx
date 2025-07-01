@@ -1,7 +1,6 @@
-
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, Shield, Zap, Users, Vote, Brain, Code, ExternalLink, Github } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ArrowRight, Shield, Zap, Users, Vote, Brain, Code, ExternalLink, Github, Lock, Globe, TrendingUp, Wallet, DollarSign, Target, User, Mail, Linkedin } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useState, useEffect } from "react";
@@ -44,8 +43,8 @@ const Index = () => {
     <div className="min-h-screen bg-background text-foreground">
       <Navigation />
       
-      {/* Hero Section - Improved Mobile */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20">
+      {/* Hero Section */}
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20">
         {/* Animated background */}
         <div className="absolute inset-0 grid-pattern opacity-30"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
@@ -83,7 +82,7 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Stats - Mobile Optimized */}
+          {/* Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
             {stats.map((stat, index) => (
               <div 
@@ -97,12 +96,12 @@ const Index = () => {
             ))}
           </div>
 
-          {/* CTA Buttons - Mobile Optimized */}
+          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 px-4">
             <Button 
               size="lg" 
               className="xmrt-gradient text-black px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl font-bold shadow-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
-              onClick={() => window.location.href = '/dao'}
+              onClick={() => document.getElementById('dao')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Join the DAO
               <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
@@ -111,7 +110,7 @@ const Index = () => {
               variant="outline" 
               size="lg" 
               className="border-2 border-primary text-primary hover:bg-primary hover:text-black px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
-              onClick={() => window.location.href = '/invest'}
+              onClick={() => document.getElementById('invest')?.scrollIntoView({ behavior: 'smooth' })}
             >
               View Investment
               <Vote className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
@@ -120,7 +119,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Protocol Features Section - Mobile Optimized */}
+      {/* Protocol Features Section */}
       <section className="py-16 sm:py-20 bg-card/30">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12 sm:mb-16">
@@ -153,77 +152,142 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Protocol Demonstrations Section - Mobile Optimized */}
-      <section className="py-16 sm:py-20">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
-              Protocol Demonstrations
+      {/* DApps Section */}
+      <section id="dapps" className="py-20 scroll-mt-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-5xl sm:text-6xl font-bold mb-6">
+              XMRT <span className="xmrt-gradient-text">DApps</span>
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
-              Live proof-of-concept applications showcasing XMRT protocol capabilities 
-              for institutional investors and strategic partners.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Decentralized applications built on XMRT protocol. Experience privacy-first finance 
+              with our suite of DeFi tools and utilities.
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-10 max-w-5xl mx-auto px-4">
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+            
+            {/* ColdCash - Privacy Payment DApp */}
             <Card className="xmrt-card hover-lift group">
-              <CardContent className="p-6 sm:p-8">
+              <CardHeader className="pb-6">
                 <div className="flex items-center mb-4">
-                  <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-primary mr-3" />
-                  <h3 className="text-xl sm:text-2xl font-bold">Payment Protocol Demo</h3>
+                  <div className="w-16 h-16 xmrt-gradient rounded-xl flex items-center justify-center mr-4">
+                    <Shield className="h-8 w-8 text-black" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-3xl font-bold">ColdCash</CardTitle>
+                    <p className="text-muted-foreground">Privacy-First Payment DApp</p>
+                  </div>
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base">
-                  Technical demonstration of XMRT's privacy-first payment infrastructure. 
-                  Showcases zero-knowledge transactions and instant settlement capabilities.
+              </CardHeader>
+              
+              <CardContent className="space-y-6">
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Send and receive payments with complete privacy. ColdCash uses zero-knowledge proofs 
+                  to ensure transaction details remain confidential while maintaining blockchain transparency.
                 </p>
-                <div className="flex flex-col gap-4">
-                  <a 
-                    href="https://coldcash.vercel.app" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center text-primary hover:text-primary/80 font-semibold text-sm sm:text-base"
-                  >
-                    View Technical Demo <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
+
+                <div className="space-y-4">
+                  <h4 className="text-xl font-semibold text-white">Key Features:</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex items-center">
+                      <Shield className="h-5 w-5 text-primary mr-3" />
+                      <span className="text-sm">Zero-Knowledge Proofs</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Zap className="h-5 w-5 text-accent mr-3" />
+                      <span className="text-sm">Instant Settlements</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Lock className="h-5 w-5 text-green-400 mr-3" />
+                      <span className="text-sm">Private Transactions</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Wallet className="h-5 w-5 text-primary mr-3" />
+                      <span className="text-sm">Multi-Token Support</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-black/50 rounded-lg p-4 border border-white/20">
+                  <p className="text-sm text-muted-foreground mb-2">Live DApp:</p>
+                  <code className="text-primary font-mono text-sm">coldcash.vercel.app</code>
+                  <p className="text-xs text-muted-foreground mt-2">Beta version - Testnet only</p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
-                    variant="outline" 
-                    size="sm" 
-                    onClick={() => window.location.href = '/invest'}
-                    className="w-full"
+                    className="xmrt-gradient text-black font-semibold flex-1"
+                    onClick={() => window.open('https://coldcash.vercel.app', '_blank')}
                   >
-                    Investment Opportunity
+                    Launch DApp
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-black">
+                    View Code
                   </Button>
                 </div>
               </CardContent>
             </Card>
 
+            {/* PiPuente - Bridge DApp */}
             <Card className="xmrt-card hover-lift group">
-              <CardContent className="p-6 sm:p-8">
+              <CardHeader className="pb-6">
                 <div className="flex items-center mb-4">
-                  <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-accent mr-3" />
-                  <h3 className="text-xl sm:text-2xl font-bold">Bridge Protocol Demo</h3>
+                  <div className="w-16 h-16 bg-gradient-to-br from-accent to-blue-600 rounded-xl flex items-center justify-center mr-4">
+                    <Globe className="h-8 w-8 text-white" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-3xl font-bold">PiPuente</CardTitle>
+                    <p className="text-muted-foreground">Cross-Chain Bridge DApp</p>
+                  </div>
                 </div>
-                <p className="text-muted-foreground mb-6 leading-relaxed text-sm sm:text-base">
-                  Proof-of-concept for XMRT's fiat-crypto bridge infrastructure. 
-                  Demonstrates seamless onramp/offramp with privacy preservation.
+              </CardHeader>
+              
+              <CardContent className="space-y-6">
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Bridge assets across different blockchains while maintaining privacy. 
+                  PiPuente enables seamless cross-chain transfers with built-in privacy protection.
                 </p>
-                <div className="flex flex-col gap-4">
-                  <a 
-                    href="https://pipuente.vercel.app" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="flex items-center text-accent hover:text-accent/80 font-semibold text-sm sm:text-base"
-                  >
-                    View Technical Demo <ExternalLink className="ml-2 h-4 w-4" />
-                  </a>
+
+                <div className="space-y-4">
+                  <h4 className="text-xl font-semibold text-white">Key Features:</h4>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="flex items-center">
+                      <Globe className="h-5 w-5 text-accent mr-3" />
+                      <span className="text-sm">Multi-Chain Support</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Zap className="h-5 w-5 text-primary mr-3" />
+                      <span className="text-sm">Fast Bridging</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Shield className="h-5 w-5 text-green-400 mr-3" />
+                      <span className="text-sm">Privacy Preserved</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Code className="h-5 w-5 text-accent mr-3" />
+                      <span className="text-sm">Smart Contract Secured</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-black/50 rounded-lg p-4 border border-white/20">
+                  <p className="text-sm text-muted-foreground mb-2">Live DApp:</p>
+                  <code className="text-accent font-mono text-sm">pipuente.vercel.app</code>
+                  <p className="text-xs text-muted-foreground mt-2">Beta version - Testnet only</p>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
-                    variant="outline" 
-                    size="sm" 
-                    onClick={() => window.location.href = '/invest'}
-                    className="w-full"
+                    className="bg-gradient-to-br from-accent to-blue-600 text-white font-semibold flex-1 hover:opacity-90"
+                    onClick={() => window.open('https://pipuente.vercel.app', '_blank')}
                   >
-                    Investment Opportunity
+                    Launch DApp
+                    <ExternalLink className="ml-2 h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-black">
+                    View Code
                   </Button>
                 </div>
               </CardContent>
@@ -232,8 +296,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* DAO Governance Section - Mobile Optimized */}
-      <section className="py-16 sm:py-20 bg-card/30">
+      {/* DAO Section */}
+      <section id="dao" className="py-16 sm:py-20 bg-card/30 scroll-mt-20">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
@@ -266,7 +330,6 @@ const Index = () => {
               <Button 
                 size="lg" 
                 className="xmrt-gradient text-black font-semibold px-6 sm:px-8 py-4 hover:opacity-90 w-full sm:w-auto"
-                onClick={() => window.location.href = '/dao'}
               >
                 Explore DAO Structure
               </Button>
@@ -274,7 +337,7 @@ const Index = () => {
                 variant="outline" 
                 size="lg" 
                 className="border-primary text-primary hover:bg-primary hover:text-black px-6 sm:px-8 py-4 w-full sm:w-auto"
-                onClick={() => window.location.href = '/invest'}
+                onClick={() => document.getElementById('invest')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Investment Opportunity
               </Button>
@@ -283,7 +346,169 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Final CTA - Mobile Optimized */}
+      {/* Investment Section */}
+      <section id="invest" className="py-20 scroll-mt-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-5xl sm:text-6xl font-bold mb-6">
+                Investment <span className="xmrt-gradient-text">Opportunity</span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                Join the next generation of privacy-first DeFi infrastructure. XMRT offers institutional-grade 
+                investment opportunities in the growing privacy economy.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+              {/* Investment Highlights */}
+              <Card className="xmrt-card">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold flex items-center">
+                    <TrendingUp className="h-6 w-6 text-primary mr-3" />
+                    Investment Highlights
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <DollarSign className="h-5 w-5 text-green-400 mr-3 mt-1" />
+                      <div>
+                        <h4 className="font-semibold">Fixed Supply Token Economics</h4>
+                        <p className="text-muted-foreground text-sm">21M max supply with deflationary mechanisms</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <Shield className="h-5 w-5 text-primary mr-3 mt-1" />
+                      <div>
+                        <h4 className="font-semibold">Privacy Market Leadership</h4>
+                        <p className="text-muted-foreground text-sm">First-mover advantage in AI-enhanced privacy DeFi</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <Brain className="h-5 w-5 text-accent mr-3 mt-1" />
+                      <div>
+                        <h4 className="font-semibold">AI Governance Innovation</h4>
+                        <p className="text-muted-foreground text-sm">Revolutionary 5-role AI system for protocol decisions</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start">
+                      <Target className="h-5 w-5 text-green-400 mr-3 mt-1" />
+                      <div>
+                        <h4 className="font-semibold">Institutional Focus</h4>
+                        <p className="text-muted-foreground text-sm">Built for enterprise and institutional adoption</p>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Token Metrics */}
+              <Card className="xmrt-card">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold flex items-center">
+                    <Wallet className="h-6 w-6 text-accent mr-3" />
+                    Token Metrics
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="text-center p-4 bg-black/50 rounded-lg">
+                      <div className="text-2xl font-bold text-primary">21M</div>
+                      <p className="text-muted-foreground text-sm">Max Supply</p>
+                    </div>
+                    <div className="text-center p-4 bg-black/50 rounded-lg">
+                      <div className="text-2xl font-bold text-accent">5</div>
+                      <p className="text-muted-foreground text-sm">AI Governance Roles</p>
+                    </div>
+                    <div className="text-center p-4 bg-black/50 rounded-lg">
+                      <div className="text-2xl font-bold text-green-400">30%</div>
+                      <p className="text-muted-foreground text-sm">DAO Quorum</p>
+                    </div>
+                    <div className="text-center p-4 bg-black/50 rounded-lg">
+                      <div className="text-2xl font-bold text-primary">Live</div>
+                      <p className="text-muted-foreground text-sm">Testnet Status</p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-black/50 rounded-lg p-4 border border-white/20">
+                    <p className="text-sm text-muted-foreground mb-2">Contract Address (Sepolia):</p>
+                    <code className="text-primary font-mono text-xs break-all">0x77307DFbc436224d5e6f2048d2b6bDfA66998a15</code>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center">
+              <Button 
+                size="lg" 
+                className="xmrt-gradient text-black font-bold px-10 py-6 text-xl hover:opacity-90"
+              >
+                Request Investment Information
+                <ArrowRight className="ml-3 h-6 w-6" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 bg-card/30 scroll-mt-20">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-5xl sm:text-6xl font-bold mb-6">
+              About <span className="xmrt-gradient-text">XMRT</span>
+            </h2>
+            <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
+              Meet the founder and learn about the vision behind XMRT's privacy-first DeFi protocol.
+            </p>
+
+            <Card className="xmrt-card max-w-2xl mx-auto">
+              <CardContent className="p-8 text-center">
+                <div className="w-24 h-24 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-6">
+                  <User className="h-12 w-12 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">Joe Lee</h3>
+                <p className="text-primary font-semibold mb-4">Founder & Lead Developer</p>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  Blockchain developer and DeFi innovator focused on building privacy-preserving 
+                  financial infrastructure. Previously worked on enterprise blockchain solutions 
+                  and decentralized governance systems.
+                </p>
+                
+                <div className="flex justify-center space-x-4">
+                  <a 
+                    href="https://github.com/josephmlee" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Github className="h-6 w-6" />
+                  </a>
+                  <a 
+                    href="https://twitter.com/JoeLee_Defi" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                  </a>
+                  <a 
+                    href="mailto:joe@xmrt.net" 
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    <Mail className="h-6 w-6" />
+                  </a>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
       <section className="py-16 sm:py-20 bg-gradient-to-br from-primary/20 via-background to-accent/20">
         <div className="container mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
@@ -297,7 +522,7 @@ const Index = () => {
             <Button 
               size="lg" 
               className="xmrt-gradient text-black font-bold px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl hover:opacity-90 transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
-              onClick={() => window.location.href = '/dao'}
+              onClick={() => document.getElementById('dao')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Vote with XMRT
               <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
@@ -306,7 +531,7 @@ const Index = () => {
               variant="outline" 
               size="lg" 
               className="border-white text-white hover:bg-white hover:text-black px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
-              onClick={() => window.location.href = '/about'}
+              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Meet the Founder
               <Github className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
