@@ -39,10 +39,10 @@ const Navigation = () => {
               Home
             </button>
             <button 
-              onClick={() => handleNavClick('/apps')}
-              className={`text-foreground hover:text-primary transition-colors font-medium ${isActive('/apps') ? 'text-primary' : ''}`}
+              onClick={() => handleNavClick('/dapps')}
+              className={`text-foreground hover:text-primary transition-colors font-medium ${isActive('/dapps') ? 'text-primary' : ''}`}
             >
-              Apps
+              DApps
             </button>
             <button 
               onClick={() => handleNavClick('/dao')}
@@ -94,10 +94,10 @@ const Navigation = () => {
                 Home
               </button>
               <button 
-                onClick={() => handleNavClick('/apps')}
-                className={`text-foreground hover:text-primary font-medium py-2 text-left ${isActive('/apps') ? 'text-primary' : ''}`}
+                onClick={() => handleNavClick('/dapps')}
+                className={`text-foreground hover:text-primary font-medium py-2 text-left ${isActive('/dapps') ? 'text-primary' : ''}`}
               >
-                Apps
+                DApps
               </button>
               <button 
                 onClick={() => handleNavClick('/dao')}
