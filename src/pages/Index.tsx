@@ -44,37 +44,37 @@ const Index = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-20">
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
         {/* Animated background */}
         <div className="absolute inset-0 grid-pattern opacity-30"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10"></div>
         
-        <div className={`container mx-auto px-4 sm:px-6 text-center relative z-10 max-w-6xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
-          <div className="mb-4 sm:mb-6">
-            <span className="inline-block px-4 sm:px-6 py-2 sm:py-3 bg-primary/20 text-primary rounded-full text-sm sm:text-lg font-semibold mb-4 sm:mb-6 animate-pulse-glow border border-primary/30">
+        <div className={`container mx-auto px-4 text-center relative z-10 max-w-6xl transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}>
+          <div className="mb-6">
+            <span className="inline-block px-3 py-2 bg-primary/20 text-primary rounded-full text-xs font-semibold mb-6 animate-pulse-glow border border-primary/30">
               🚀 Smart Contract Live on Sepolia Testnet
             </span>
           </div>
           
-          <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold mb-6 sm:mb-8 leading-tight px-2">
-            <span className="block mb-2 sm:mb-4">Private Finance.</span>
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <span className="block mb-2">Private Finance.</span>
             <span className="block xmrt-gradient-text animate-float">Public Power.</span>
           </h1>
           
-          <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-8 sm:mb-10 max-w-4xl mx-auto leading-relaxed px-2">
+          <p className="text-base md:text-xl text-muted-foreground mb-8 max-w-3xl mx-auto leading-relaxed">
             XMRT is a privacy-first DeFi protocol with AI-enhanced DAO governance, 
             built on Monero's principles for the next generation of decentralized finance.
           </p>
 
           {/* Contract Address Info */}
-          <div className="mb-8 sm:mb-12 px-4">
-            <div className="bg-card/50 rounded-xl p-4 sm:p-6 border border-white/10 max-w-2xl mx-auto">
-              <p className="text-sm text-muted-foreground mb-2">XMRT Token Contract (Sepolia Testnet):</p>
+          <div className="mb-8">
+            <div className="bg-card/50 rounded-xl p-4 border border-white/10 max-w-2xl mx-auto">
+              <p className="text-xs text-muted-foreground mb-2">XMRT Token Contract (Sepolia Testnet):</p>
               <a 
                 href="https://sepolia.etherscan.io/token/0x77307DFbc436224d5e6f2048d2b6bDfA66998a15"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:text-primary/80 font-mono text-sm break-all flex items-center justify-center gap-2"
+                className="text-primary hover:text-primary/80 font-mono text-xs break-all flex items-center justify-center gap-2"
               >
                 0x77307DFbc436224d5e6f2048d2b6bDfA66998a15
                 <ExternalLink className="h-4 w-4 flex-shrink-0" />
@@ -83,68 +83,68 @@ const Index = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-8 mb-8 sm:mb-12 max-w-2xl mx-auto px-4">
+          <div className="grid grid-cols-3 gap-4 mb-8 max-w-lg mx-auto">
             {stats.map((stat, index) => (
               <div 
                 key={index}
-                className={`text-center p-4 sm:p-6 xmrt-card hover-lift ${isVisible ? 'animate-fade-in-up' : ''}`}
+                className={`text-center p-3 xmrt-card hover-lift ${isVisible ? 'animate-fade-in-up' : ''}`}
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <div className={`text-2xl sm:text-3xl md:text-4xl font-bold ${stat.color} mb-2`}>{stat.value}</div>
-                <p className="text-muted-foreground font-medium text-sm sm:text-base">{stat.label}</p>
+                <div className={`text-xl font-bold ${stat.color} mb-1`}>{stat.value}</div>
+                <p className="text-muted-foreground font-medium text-xs">{stat.label}</p>
               </div>
             ))}
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center mb-12 sm:mb-16 px-4">
+          <div className="flex flex-col gap-3 justify-center mb-12">
             <Button 
               size="lg" 
-              className="xmrt-gradient text-black px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl font-bold shadow-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
-              onClick={() => document.getElementById('dao')?.scrollIntoView({ behavior: 'smooth' })}
+              className="xmrt-gradient text-black px-8 py-4 text-lg font-bold shadow-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 rounded-xl"
+              onClick={() => document.getElementById('faucet')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Join the DAO
-              <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
+              Get Free XMRT
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-black px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl w-full sm:w-auto"
-              onClick={() => document.getElementById('invest')?.scrollIntoView({ behavior: 'smooth' })}
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-black px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl"
+              onClick={() => document.getElementById('dao')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              View Investment
-              <Vote className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
+              Join the DAO
+              <Vote className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>
       </section>
 
       {/* Protocol Features Section */}
-      <section className="py-16 sm:py-20 bg-card/30">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
+      <section className="py-12 bg-card/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-4xl font-bold mb-4">
               The XMRT Protocol
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto">
               A comprehensive DeFi infrastructure combining privacy, governance, 
               and artificial intelligence for institutional-grade decentralized finance.
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-10 max-w-6xl mx-auto px-4">
+          <div className="grid grid-cols-1 gap-6 max-w-4xl mx-auto">
             {features.map((feature, index) => (
               <Card 
                 key={index}
                 className={`xmrt-card hover-lift group ${isVisible ? 'animate-fade-in-up' : ''}`}
                 style={{ animationDelay: `${index * 200}ms` }}
               >
-                <CardContent className="p-6 sm:p-8 text-center">
-                  <div className="mb-4 sm:mb-6">
-                    <feature.icon className={`h-12 w-12 sm:h-16 sm:w-16 ${feature.color} mx-auto group-hover:scale-125 transition-transform duration-500`} />
+                <CardContent className="p-6 text-center">
+                  <div className="mb-4">
+                    <feature.icon className={`h-12 w-12 ${feature.color} mx-auto group-hover:scale-125 transition-transform duration-500`} />
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{feature.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{feature.description}</p>
+                  <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{feature.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -152,20 +152,82 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Faucet Section */}
+      <section id="faucet" className="py-16 scroll-mt-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
+              XMRT <span className="xmrt-gradient-text">Faucet</span>
+            </h2>
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Get free XMRT testnet tokens to explore our DeFi protocol and test our applications.
+            </p>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <Card className="xmrt-card">
+              <CardContent className="p-6">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 xmrt-gradient rounded-full flex items-center justify-center mx-auto mb-4">
+                    <DollarSign className="h-8 w-8 text-black" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Request Testnet XMRT</h3>
+                  <p className="text-muted-foreground text-sm">Get up to 1000 XMRT tokens for testing</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="bg-black/50 rounded-lg p-4 border border-white/20">
+                    <p className="text-xs text-muted-foreground mb-2">Network: Sepolia Testnet</p>
+                    <p className="text-xs text-muted-foreground mb-2">Daily Limit: 1000 XMRT per address</p>
+                    <p className="text-xs text-muted-foreground">Contract: 0x77307DFbc436224d5e6f2048d2b6bDfA66998a15</p>
+                  </div>
+
+                  <div className="space-y-3">
+                    <input 
+                      type="text" 
+                      placeholder="Enter your Ethereum address (0x...)"
+                      className="w-full p-3 bg-black/50 border border-white/20 rounded-lg text-white placeholder-muted-foreground text-sm focus:border-primary focus:outline-none"
+                    />
+                    <Button className="w-full xmrt-gradient text-black font-semibold py-3">
+                      Request XMRT Tokens
+                      <Zap className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+
+                  <div className="text-center">
+                    <p className="text-xs text-muted-foreground">
+                      Need Sepolia ETH for gas? Visit the{" "}
+                      <a 
+                        href="https://sepoliafaucet.com" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-primary hover:underline"
+                      >
+                        Sepolia Faucet
+                      </a>
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* DApps Section */}
-      <section id="dapps" className="py-20 scroll-mt-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl sm:text-6xl font-bold mb-6">
+      <section id="dapps" className="py-16 bg-card/30 scroll-mt-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               XMRT <span className="xmrt-gradient-text">DApps</span>
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Decentralized applications built on XMRT protocol. Experience privacy-first finance 
               with our suite of DeFi tools and utilities.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 gap-8 max-w-4xl mx-auto">
             
             {/* ColdCash - Privacy Payment DApp */}
             <Card className="xmrt-card hover-lift group">
@@ -297,46 +359,46 @@ const Index = () => {
       </section>
 
       {/* DAO Section */}
-      <section id="dao" className="py-16 sm:py-20 bg-card/30 scroll-mt-20">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
+      <section id="dao" className="py-16 scroll-mt-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               AI-Enhanced DAO Governance
             </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground mb-8 sm:mb-12 leading-relaxed px-4">
+            <p className="text-base text-muted-foreground mb-12 leading-relaxed">
               XMRT's governance system combines community voting with AI oversight, 
               ensuring proposals meet technical, economic, and strategic criteria.
             </p>
             
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12 px-4">
-              <div className="text-center">
-                <Vote className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4" />
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">Token-Weighted Voting</h3>
+            <div className="grid grid-cols-1 gap-6 mb-12">
+              <div className="text-center p-4 xmrt-card">
+                <Vote className="h-10 w-10 text-primary mx-auto mb-3" />
+                <h3 className="text-lg font-semibold mb-2">Token-Weighted Voting</h3>
                 <p className="text-muted-foreground text-sm">Stake XMRT tokens to participate in protocol governance</p>
               </div>
-              <div className="text-center">
-                <Brain className="h-10 w-10 sm:h-12 sm:w-12 text-accent mx-auto mb-4" />
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">AI Proposal Analysis</h3>
+              <div className="text-center p-4 xmrt-card">
+                <Brain className="h-10 w-10 text-accent mx-auto mb-3" />
+                <h3 className="text-lg font-semibold mb-2">AI Proposal Analysis</h3>
                 <p className="text-muted-foreground text-sm">5 specialized AI roles evaluate all governance proposals</p>
               </div>
-              <div className="text-center">
-                <Users className="h-10 w-10 sm:h-12 sm:w-12 text-green-400 mx-auto mb-4" />
-                <h3 className="text-lg sm:text-xl font-semibold mb-2">Community Quorum</h3>
+              <div className="text-center p-4 xmrt-card">
+                <Users className="h-10 w-10 text-green-400 mx-auto mb-3" />
+                <h3 className="text-lg font-semibold mb-2">Community Quorum</h3>
                 <p className="text-muted-foreground text-sm">30% participation threshold for decision validity</p>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center px-4">
+            <div className="flex flex-col gap-3 justify-center">
               <Button 
                 size="lg" 
-                className="xmrt-gradient text-black font-semibold px-6 sm:px-8 py-4 hover:opacity-90 w-full sm:w-auto"
+                className="xmrt-gradient text-black font-semibold px-8 py-4 hover:opacity-90"
               >
                 Explore DAO Structure
               </Button>
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-primary text-primary hover:bg-primary hover:text-black px-6 sm:px-8 py-4 w-full sm:w-auto"
+                className="border-primary text-primary hover:bg-primary hover:text-black px-8 py-4"
                 onClick={() => document.getElementById('invest')?.scrollIntoView({ behavior: 'smooth' })}
               >
                 Investment Opportunity
@@ -347,20 +409,20 @@ const Index = () => {
       </section>
 
       {/* Investment Section */}
-      <section id="invest" className="py-20 scroll-mt-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-5xl sm:text-6xl font-bold mb-6">
+      <section id="invest" className="py-16 bg-card/30 scroll-mt-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-5xl font-bold mb-4">
                 Investment <span className="xmrt-gradient-text">Opportunity</span>
               </h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
                 Join the next generation of privacy-first DeFi infrastructure. XMRT offers institutional-grade 
                 investment opportunities in the growing privacy economy.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            <div className="grid grid-cols-1 gap-8 mb-12">
               {/* Investment Highlights */}
               <Card className="xmrt-card">
                 <CardHeader>
@@ -453,13 +515,13 @@ const Index = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-card/30 scroll-mt-20">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-5xl sm:text-6xl font-bold mb-6">
+      <section id="about" className="py-16 scroll-mt-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">
               About <span className="xmrt-gradient-text">XMRT</span>
             </h2>
-            <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
+            <p className="text-base text-muted-foreground mb-12 leading-relaxed">
               Meet the founder and learn about the vision behind XMRT's privacy-first DeFi protocol.
             </p>
 
@@ -509,32 +571,32 @@ const Index = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-primary/20 via-background to-accent/20">
-        <div className="container mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 px-2">
+      <section className="py-16 bg-gradient-to-br from-primary/20 via-background to-accent/20">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">
             Join the Future of Private Finance
           </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-3xl mx-auto px-4">
+          <p className="text-base text-muted-foreground mb-12 max-w-2xl mx-auto">
             XMRT is building the infrastructure for privacy-first DeFi. 
             Participate in governance, explore our protocol, or learn about investment opportunities.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center px-4">
+          <div className="flex flex-col gap-3 justify-center">
             <Button 
               size="lg" 
-              className="xmrt-gradient text-black font-bold px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl hover:opacity-90 transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
-              onClick={() => document.getElementById('dao')?.scrollIntoView({ behavior: 'smooth' })}
+              className="xmrt-gradient text-black font-bold px-10 py-4 text-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300"
+              onClick={() => document.getElementById('faucet')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Vote with XMRT
-              <ArrowRight className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
+              Get Free Tokens
+              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-white text-white hover:bg-white hover:text-black px-6 sm:px-10 py-4 sm:py-6 text-lg sm:text-xl font-semibold transform hover:scale-105 transition-all duration-300 w-full sm:w-auto"
-              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+              className="border-white text-white hover:bg-white hover:text-black px-10 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300"
+              onClick={() => document.getElementById('dao')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Meet the Founder
-              <Github className="ml-2 sm:ml-3 h-5 w-5 sm:h-6 sm:w-6" />
+              Join the DAO
+              <Vote className="ml-2 h-5 w-5" />
             </Button>
           </div>
         </div>
