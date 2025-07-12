@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Shield } from "lucide-react";
+import { WalletButton } from "@/components/WalletButton";
 
 const Navigation = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -67,10 +68,14 @@ const Navigation = () => {
             >
               About
             </button>
+            <WalletButton />
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
+            <div className="md:hidden">
+              <WalletButton />
+            </div>
             <button
               className="md:hidden p-2 text-foreground hover:text-primary"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

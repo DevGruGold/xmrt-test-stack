@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowRight, Shield, Zap, Users, Vote, Brain, Code, ExternalLink, Github, Lock, Globe, TrendingUp, Wallet, DollarSign, Target, User, Mail, Linkedin } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { Faucet } from "@/components/Faucet";
 import { useState, useEffect } from "react";
 
 const Index = () => {
@@ -164,52 +165,8 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="max-w-2xl mx-auto">
-            <Card className="xmrt-card">
-              <CardContent className="p-6">
-                <div className="text-center mb-6">
-                  <div className="w-16 h-16 xmrt-gradient rounded-full flex items-center justify-center mx-auto mb-4">
-                    <DollarSign className="h-8 w-8 text-black" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-2">Request Testnet XMRT</h3>
-                  <p className="text-muted-foreground text-sm">Get up to 1000 XMRT tokens for testing</p>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="bg-black/50 rounded-lg p-4 border border-white/20">
-                    <p className="text-xs text-muted-foreground mb-2">Network: Sepolia Testnet</p>
-                    <p className="text-xs text-muted-foreground mb-2">Daily Limit: 1000 XMRT per address</p>
-                    <p className="text-xs text-muted-foreground">Contract: 0x77307DFbc436224d5e6f2048d2b6bDfA66998a15</p>
-                  </div>
-
-                  <div className="space-y-3">
-                    <input 
-                      type="text" 
-                      placeholder="Enter your Ethereum address (0x...)"
-                      className="w-full p-3 bg-black/50 border border-white/20 rounded-lg text-white placeholder-muted-foreground text-sm focus:border-primary focus:outline-none"
-                    />
-                    <Button className="w-full xmrt-gradient text-black font-semibold py-3">
-                      Request XMRT Tokens
-                      <Zap className="ml-2 h-4 w-4" />
-                    </Button>
-                  </div>
-
-                  <div className="text-center">
-                    <p className="text-xs text-muted-foreground">
-                      Need Sepolia ETH for gas? Visit the{" "}
-                      <a 
-                        href="https://sepoliafaucet.com" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-primary hover:underline"
-                      >
-                        Sepolia Faucet
-                      </a>
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          <div className="max-w-md mx-auto">
+            <Faucet />
           </div>
         </div>
       </section>
