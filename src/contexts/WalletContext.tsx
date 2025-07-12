@@ -161,25 +161,14 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
     setIsRequestingTokens(true);
     
     try {
-      // Simulate faucet request - in a real implementation, this would call a backend service
-      const response = await fetch('/api/faucet', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ address: account }),
-      }).catch(() => {
-        // If backend doesn't exist, simulate success for demo
-        return { ok: true, json: () => Promise.resolve({ success: true }) };
-      });
-
-      if (response.ok) {
-        alert('🎉 Successfully requested 1000 XMRT tokens! They should appear in your wallet shortly.');
-        // Update balance after a short delay
-        setTimeout(updateBalance, 3000);
-      } else {
-        alert('❌ Faucet request failed. Please try again later.');
-      }
+      // Simulate faucet request delay (since no backend exists)
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Simulate successful faucet request for demo purposes
+      alert('🎉 Successfully requested 1000 XMRT tokens! This is a demo faucet - in a real implementation, tokens would be sent from a backend service.');
+      
+      // Update balance after a short delay
+      setTimeout(updateBalance, 3000);
     } catch (error) {
       console.error('Error requesting tokens:', error);
       alert('❌ Error requesting tokens. Please try again later.');
