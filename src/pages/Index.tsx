@@ -69,17 +69,20 @@ const Index = () => {
 
           {/* Contract Address Info */}
           <div className="mb-8">
-            <div className="bg-card/50 rounded-xl p-4 border border-white/10 max-w-2xl mx-auto">
-              <p className="text-xs text-muted-foreground mb-2">XMRT Token Contract (Sepolia Testnet):</p>
-              <a 
-                href="https://sepolia.etherscan.io/token/0x77307DFbc436224d5e6f2048d2b6bDfA66998a15"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:text-primary/80 font-mono text-xs break-all flex items-center justify-center gap-2"
-              >
-                0x77307DFbc436224d5e6f2048d2b6bDfA66998a15
-                <ExternalLink className="h-4 w-4 flex-shrink-0" />
-              </a>
+            <div className="bg-card/50 rounded-xl p-3 border border-white/10 max-w-md mx-auto">
+              <p className="text-xs text-muted-foreground mb-2 text-center">XMRT Token Contract (Sepolia)</p>
+              <div className="flex items-center justify-center">
+                <a 
+                  href="https://sepolia.etherscan.io/token/0x77307DFbc436224d5e6f2048d2b6bDfA66998a15"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:text-primary/80 flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
+                  title="View on Etherscan"
+                >
+                  <ExternalLink className="h-5 w-5" />
+                  <span className="text-sm font-semibold">View Contract</span>
+                </a>
+              </div>
             </div>
           </div>
 
@@ -98,23 +101,23 @@ const Index = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col gap-3 justify-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-12 max-w-md mx-auto">
             <Button 
               size="lg" 
-              className="xmrt-gradient text-black px-8 py-4 text-lg font-bold shadow-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 rounded-xl"
+              className="xmrt-gradient text-black px-6 py-3 text-base font-bold shadow-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300 rounded-xl flex-1"
               onClick={() => document.getElementById('faucet')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Get Free XMRT
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-black px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-black px-6 py-3 text-base font-semibold transform hover:scale-105 transition-all duration-300 rounded-xl flex-1"
               onClick={() => document.getElementById('dao')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Join the DAO
-              <Vote className="ml-2 h-5 w-5" />
+              Join DAO
+              <Vote className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
@@ -234,15 +237,16 @@ const Index = () => {
                   <p className="text-xs text-muted-foreground mt-2">Beta version - Testnet only</p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col gap-3">
                   <Button 
-                    className="xmrt-gradient text-black font-semibold flex-1"
+                    className="xmrt-gradient text-black font-semibold w-full"
                     onClick={() => window.open('https://coldcash.vercel.app', '_blank')}
                   >
                     Launch DApp
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-black">
+                  <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-black w-full">
+                    <Github className="mr-2 h-4 w-4" />
                     View Code
                   </Button>
                 </div>
@@ -297,15 +301,16 @@ const Index = () => {
                   <p className="text-xs text-muted-foreground mt-2">Beta version - Testnet only</p>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4">
+                <div className="flex flex-col gap-3">
                   <Button 
-                    className="bg-gradient-to-br from-accent to-blue-600 text-white font-semibold flex-1 hover:opacity-90"
+                    className="bg-gradient-to-br from-accent to-blue-600 text-white font-semibold w-full hover:opacity-90"
                     onClick={() => window.open('https://pipuente.vercel.app', '_blank')}
                   >
                     Launch DApp
                     <ExternalLink className="ml-2 h-4 w-4" />
                   </Button>
-                  <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-black">
+                  <Button variant="outline" className="border-accent text-accent hover:bg-accent hover:text-black w-full">
+                    <Github className="mr-2 h-4 w-4" />
                     View Code
                   </Button>
                 </div>
@@ -450,23 +455,24 @@ const Index = () => {
                     </div>
                   </div>
                   
-                  <div className="bg-black/50 rounded-lg p-4 border border-white/20">
-                    <p className="text-sm text-muted-foreground mb-2">Contract Address (Sepolia):</p>
-                    <code className="text-primary font-mono text-xs break-all">0x77307DFbc436224d5e6f2048d2b6bDfA66998a15</code>
+                  <div className="bg-black/50 rounded-lg p-4 border border-white/20 text-center">
+                    <p className="text-sm text-muted-foreground mb-3">Contract Address (Sepolia)</p>
+                    <a 
+                      href="https://sepolia.etherscan.io/token/0x77307DFbc436224d5e6f2048d2b6bDfA66998a15"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary hover:text-primary/80 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors"
+                      title="View on Etherscan"
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                      <span className="text-sm font-semibold">View on Etherscan</span>
+                    </a>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="text-center">
-              <Button 
-                size="lg" 
-                className="xmrt-gradient text-black font-bold px-10 py-6 text-xl hover:opacity-90"
-              >
-                Request Investment Information
-                <ArrowRight className="ml-3 h-6 w-6" />
-              </Button>
-            </div>
+
           </div>
         </div>
       </section>
@@ -497,10 +503,11 @@ const Index = () => {
                 
                 <div className="flex justify-center space-x-4">
                   <a 
-                    href="https://github.com/josephmlee" 
+                    href="https://github.com/DevGruGold" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-muted-foreground hover:text-primary transition-colors p-2 rounded-lg hover:bg-white/5"
+                    title="GitHub Profile"
                   >
                     <Github className="h-6 w-6" />
                   </a>
@@ -537,23 +544,23 @@ const Index = () => {
             XMRT is building the infrastructure for privacy-first DeFi. 
             Participate in governance, explore our protocol, or learn about investment opportunities.
           </p>
-          <div className="flex flex-col gap-3 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
             <Button 
               size="lg" 
-              className="xmrt-gradient text-black font-bold px-10 py-4 text-lg hover:opacity-90 transform hover:scale-105 transition-all duration-300"
+              className="xmrt-gradient text-black font-bold px-8 py-3 text-base hover:opacity-90 transform hover:scale-105 transition-all duration-300 flex-1"
               onClick={() => document.getElementById('faucet')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Get Free Tokens
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-white text-white hover:bg-white hover:text-black px-10 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300"
+              className="border-white text-white hover:bg-white hover:text-black px-8 py-3 text-base font-semibold transform hover:scale-105 transition-all duration-300 flex-1"
               onClick={() => document.getElementById('dao')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Join the DAO
-              <Vote className="ml-2 h-5 w-5" />
+              Join DAO
+              <Vote className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
