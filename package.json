@@ -1,7 +1,7 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "xmrt-test-stack",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -81,5 +81,28 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1"
-  }
+  },
+  "description": "A modern, full-stack web application built with cutting-edge technologies for testing and development within the XMRT ecosystem",
+  "author": "Joseph Andrew Lee (DevGruGold) <contact@xmrt.io>",
+  "homepage": "https://xmrt.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DevGruGold/xmrt-test-stack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DevGruGold/xmrt-test-stack/issues"
+  },
+  "keywords": [
+    "xmrt",
+    "blockchain",
+    "web3",
+    "react",
+    "typescript",
+    "vite",
+    "tailwindcss",
+    "shadcn-ui",
+    "ethereum",
+    "dapp"
+  ],
+  "license": "PROPRIETARY"
 }
