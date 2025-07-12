@@ -77,9 +77,20 @@ export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   };
 
   const connectWallet = async () => {
+    // Check if we're on mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
     if (typeof window.ethereum === 'undefined') {
-      alert('MetaMask is not installed. Please install MetaMask to connect your wallet.');
-      return;
+      if (isMobile) {
+        // On mobile, redirect to MetaMask app with deep link
+        const dappUrl = window.location.href;
+        const metamaskAppDeepLink = `https://metamask.app.link/dapp/${encodeURIComponent(dappUrl)}`;
+        window.open(metamaskAppDeepLink, '_self');
+        return;
+      } else {
+        alert('MetaMask is not installed. Please install MetaMask to connect your wallet.');
+        return;
+      }
     }
 
     setIsConnecting(true);
