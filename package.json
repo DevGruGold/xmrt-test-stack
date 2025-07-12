@@ -80,7 +80,7 @@
     "tailwindcss": "^3.4.11",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.19"
   },
   "description": "A modern, full-stack web application built with cutting-edge technologies for testing and development within the XMRT ecosystem",
   "author": "Joseph Andrew Lee (DevGruGold) <contact@xmrt.io>",
