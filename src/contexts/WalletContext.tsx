@@ -1,328 +1,130 @@
 // Verification: ee222d48-d2fb-40d3-b0bd-6fa4a7ab094c=a2d319e8d34db477c859741ef7e4165fda851257b90bfbcb652bb9296b0e51e9
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { ethers } from 'ethers';
+import { Web3Auth } from '@web3auth/modal';
+import { CHAIN_NAMESPACES, IProvider, WEB3AUTH_NETWORK } from '@web3auth/base';
+import { EthereumPrivateKeyProvider } from '@web3auth/ethereum-provider';
+import { createAppKit } from '@reown/appkit/react';
+import { WagmiProvider } from 'wagmi';
+import { arbitrum, mainnet, sepolia } from '@reown/appkit/networks';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { WagmiAdapter } from '@reown/appkit-adapter-wagmi';
+
+// Environment variables
+const INFURA_KEY = process.env.REACT_APP_INFURA_KEY || 'c843a693bc5d43d1aee471d2491f2414';
+const REOWN_PROJECT_ID = process.env.REACT_APP_REOWN_PROJECT_ID || '3c0e28ee15f49b20eebc46f23df5aa8e';
+const WEB3AUTH_CLIENT_ID = process.env.REACT_APP_WEB3AUTH_CLIENT_ID || 'BEb2L3krttO76pfZzYGtTjW1nPop_Urx5GsrWafLnikRcdQNBXs6vhDx5p_dn1L9PG5KeFqo9cIaIARsdAwMx8Q';
+const XMRT_CONTRACT_ADDRESS = process.env.REACT_APP_XMRT_CONTRACT_ADDRESS || '0x77307DFbc436224d5e6f2048d2b6bDfA66998a15';
+
+// XMRT Token ABI (ERC-20 standard functions)
+const XMRT_ABI = [
+  'function name() view returns (string)',
+  'function symbol() view returns (string)',
+  'function decimals() view returns (uint8)',
+  'function totalSupply() view returns (uint256)',
+  'function balanceOf(address) view returns (uint256)',
+  'function transfer(address to, uint256 amount) returns (bool)',
+  'function allowance(address owner, address spender) view returns (uint256)',
+  'function approve(address spender, uint256 amount) returns (bool)',
+  'function transferFrom(address from, address to, uint256 amount) returns (bool)',
+  'function mint(address to, uint256 amount) returns (bool)',
+  'function faucet() returns (bool)',
+  'function faucetAmount() view returns (uint256)',
+  'function faucetCooldown() view returns (uint256)',
+  'function lastFaucetTime(address) view returns (uint256)',
+  'event Transfer(address indexed from, address indexed to, uint256 value)',
+  'event Approval(address indexed owner, address indexed spender, uint256 value)'
+];
+
+// Sepolia network configuration
+const sepoliaNetwork = {
+  chainId: 11155111,
+  name: 'Sepolia',
+  currency: 'ETH',
+  explorerUrl: 'https://sepolia.etherscan.io',
+  rpcUrl: `https://sepolia.infura.io/v3/${INFURA_KEY}`
+};
+
+// Web3Auth configuration
+const chainConfig = {
+  chainNamespace: CHAIN_NAMESPACES.EIP155,
+  chainId: '0xaa36a7', // Sepolia testnet
+  rpcTarget: `https://sepolia.infura.io/v3/${INFURA_KEY}`,
+  displayName: 'Sepolia Testnet',
+  blockExplorer: 'https://sepolia.etherscan.io',
+  ticker: 'ETH',
+  tickerName: 'Ethereum',
+};
+
+const privateKeyProvider = new EthereumPrivateKeyProvider({
+  config: { chainConfig },
+});
+
+const web3auth = new Web3Auth({
+  clientId: WEB3AUTH_CLIENT_ID,
+  web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
+  privateKeyProvider,
+});
+
+// Wagmi configuration for Reown
+const queryClient = new QueryClient();
+
+const wagmiAdapter = new WagmiAdapter({
+  storage: localStorage,
+  networks: [sepolia, mainnet, arbitrum],
+  projectId: REOWN_PROJECT_ID,
+});
+
+// Create the modal
+const modal = createAppKit({
+  adapters: [wagmiAdapter],
+  projectId: REOWN_PROJECT_ID,
+  networks: [sepolia, mainnet, arbitrum],
+  defaultNetwork: sepolia,
+  metadata: {
+    name: 'XMRT Test Stack',
+    description: 'XMRT Ecosystem Test Application',
+    url: 'https://xmrt.io',
+    icons: ['https://xmrt.io/favicon.ico']
+  },
+  features: {
+    analytics: true,
+  }
+});
 
 interface WalletContextType {
+  // Connection state
   account: string | null;
-  balance: string | null;
   isConnected: boolean;
   isConnecting: boolean;
-  walletType: 'metamask' | 'walletconnect' | null;
-  connectWallet: (type: 'metamask' | 'walletconnect') => Promise<void>;
-  disconnectWallet: () => void;
-  requestTokens: () => Promise<void>;
-  isRequestingTokens: boolean;
-  networkId: number | null;
+  walletType: 'web3auth' | 'reown' | null;
+
+  // Network state
+  chainId: number | null;
+  networkName: string | null;
+
+  // Balances
+  ethBalance: string | null;
+  xmrtBalance: string | null;
+
+  // Connection methods
+  connectWeb3Auth: () => Promise<void>;
+  connectReown: () => Promise<void>;
+  disconnect: () => Promise<void>;
+
+  // Network operations
+  switchToSepolia: () => Promise<void>;
+
+  // Faucet operations
+  requestFaucet: () => Promise<{ success: boolean; txHash?: string; error?: string }>;
+  getFaucetCooldown: () => Promise<number>;
+
+  // Utility functions
+  refreshBalances: () => Promise<void>;
+  getProvider: () => ethers.BrowserProvider | null;
 }
 
 const WalletContext = createContext<WalletContextType | undefined>(undefined);
-
-const INFURA_KEY = 'c843a693bc5d43d1aee471d2491f2414';
-const WALLETCONNECT_PROJECT_ID = '3c0e28ee15f49b20eebc46f23df5aa8e';
-const SEPOLIA_RPC_URL = `https://sepolia.infura.io/v3/${INFURA_KEY}`;
-const SEPOLIA_CHAIN_ID = 11155111;
-const XMRT_CONTRACT_ADDRESS = '0x77307DFbc436224d5e6f2048d2b6bDfA66998a15';
-
-const XMRT_ABI = [
-  'function balanceOf(address owner) view returns (uint256)',
-  'function decimals() view returns (uint8)',
-  'function symbol() view returns (string)',
-  'function transfer(address to, uint256 amount) returns (bool)',
-  'event Transfer(address indexed from, address indexed to, uint256 value)'
-];
-
-export const WalletProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [account, setAccount] = useState<string | null>(null);
-  const [balance, setBalance] = useState<string | null>(null);
-  const [isConnected, setIsConnected] = useState(false);
-  const [isConnecting, setIsConnecting] = useState(false);
-  const [isRequestingTokens, setIsRequestingTokens] = useState(false);
-  const [walletType, setWalletType] = useState<'metamask' | 'walletconnect' | null>(null);
-  const [networkId, setNetworkId] = useState<number | null>(null);
-
-  useEffect(() => {
-    checkExistingConnection();
-    setupEventListeners();
-  }, []);
-
-  useEffect(() => {
-    if (account) {
-      updateBalance();
-    }
-  }, [account]);
-
-  const checkExistingConnection = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-        if (accounts.length > 0) {
-          setAccount(accounts[0]);
-          setIsConnected(true);
-          setWalletType('metamask');
-          const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-          setNetworkId(parseInt(chainId, 16));
-        }
-      } catch (error) {
-        console.error('Error checking MetaMask connection:', error);
-      }
-    }
-  };
-
-  const setupEventListeners = () => {
-    if (typeof window.ethereum !== 'undefined') {
-      window.ethereum.on('accountsChanged', (accounts: string[]) => {
-        if (accounts.length > 0) {
-          setAccount(accounts[0]);
-          setIsConnected(true);
-        } else {
-          disconnectWallet();
-        }
-      });
-
-      window.ethereum.on('chainChanged', (chainId: string) => {
-        setNetworkId(parseInt(chainId, 16));
-        if (parseInt(chainId, 16) !== SEPOLIA_CHAIN_ID) {
-          console.warn('Please switch to Sepolia testnet');
-        }
-      });
-
-      window.ethereum.on('connect', (connectInfo: { chainId: string }) => {
-        setNetworkId(parseInt(connectInfo.chainId, 16));
-      });
-
-      window.ethereum.on('disconnect', () => {
-        disconnectWallet();
-      });
-    }
-  };
-
-  const detectMobile = () => {
-    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  };
-
-  const connectMetaMask = async () => {
-    const isMobile = detectMobile();
-
-    if (typeof window.ethereum === 'undefined') {
-      if (isMobile) {
-        const dappUrl = encodeURIComponent(window.location.href);
-        const metamaskDeepLink = `https://metamask.app.link/dapp/${dappUrl}`;
-        window.open(metamaskDeepLink, '_self');
-        return;
-      } else {
-        throw new Error('MetaMask is not installed. Please install MetaMask to connect.');
-      }
-    }
-
-    try {
-      const accounts = await window.ethereum.request({ 
-        method: 'eth_requestAccounts' 
-      });
-
-      if (accounts.length > 0) {
-        setAccount(accounts[0]);
-        setIsConnected(true);
-        setWalletType('metamask');
-        await switchToSepolia();
-        await addXMRTToken();
-      }
-    } catch (error: any) {
-      console.error('Error connecting MetaMask:', error);
-      throw error;
-    }
-  };
-
-  const connectWalletConnect = async () => {
-    try {
-      const { EthereumProvider } = await import('@walletconnect/ethereum-provider');
-
-      const provider = await EthereumProvider.init({
-        projectId: WALLETCONNECT_PROJECT_ID,
-        chains: [SEPOLIA_CHAIN_ID],
-        rpcMap: {
-          [SEPOLIA_CHAIN_ID]: SEPOLIA_RPC_URL
-        },
-        showQrModal: true,
-        metadata: {
-          name: 'XMRT Test Stack',
-          description: 'XMRT privacy-first DeFi protocol',
-          url: window.location.origin,
-          icons: ['https://xmrt.io/favicon.ico']
-        }
-      });
-
-      await provider.connect();
-
-      const accounts = await provider.request({ method: 'eth_accounts' });
-      if (accounts.length > 0) {
-        setAccount(accounts[0]);
-        setIsConnected(true);
-        setWalletType('walletconnect');
-        setNetworkId(SEPOLIA_CHAIN_ID);
-      }
-
-      provider.on('accountsChanged', (accounts: string[]) => {
-        if (accounts.length > 0) {
-          setAccount(accounts[0]);
-        } else {
-          disconnectWallet();
-        }
-      });
-
-      provider.on('chainChanged', (chainId: number) => {
-        setNetworkId(chainId);
-      });
-
-      provider.on('disconnect', () => {
-        disconnectWallet();
-      });
-
-    } catch (error: any) {
-      console.error('Error connecting WalletConnect:', error);
-      throw error;
-    }
-  };
-
-  const switchToSepolia = async () => {
-    if (typeof window.ethereum === 'undefined') return;
-
-    try {
-      await window.ethereum.request({
-        method: 'wallet_switchEthereumChain',
-        params: [{ chainId: '0xaa36a7' }],
-      });
-    } catch (switchError: any) {
-      if (switchError.code === 4902) {
-        await window.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [{
-            chainId: '0xaa36a7',
-            chainName: 'Sepolia Test Network',
-            nativeCurrency: {
-              name: 'ETH',
-              symbol: 'ETH',
-              decimals: 18,
-            },
-            rpcUrls: [SEPOLIA_RPC_URL],
-            blockExplorerUrls: ['https://sepolia.etherscan.io/'],
-          }],
-        });
-      } else {
-        throw switchError;
-      }
-    }
-  };
-
-  const addXMRTToken = async () => {
-    if (typeof window.ethereum === 'undefined') return;
-
-    try {
-      await window.ethereum.request({
-        method: 'wallet_watchAsset',
-        params: {
-          type: 'ERC20',
-          options: {
-            address: XMRT_CONTRACT_ADDRESS,
-            symbol: 'XMRT',
-            decimals: 18,
-            image: 'https://xmrt.io/favicon.ico',
-          },
-        },
-      });
-    } catch (error) {
-      console.log('Token addition failed:', error);
-    }
-  };
-
-  const updateBalance = async () => {
-    if (!account) return;
-
-    try {
-      const provider = new ethers.JsonRpcProvider(SEPOLIA_RPC_URL);
-      const contract = new ethers.Contract(XMRT_CONTRACT_ADDRESS, XMRT_ABI, provider);
-
-      const balance = await contract.balanceOf(account);
-      const decimals = await contract.decimals();
-      const formattedBalance = ethers.formatUnits(balance, decimals);
-
-      setBalance(parseFloat(formattedBalance).toFixed(4));
-    } catch (error) {
-      console.error('Error fetching balance:', error);
-      setBalance('0');
-    }
-  };
-
-  const connectWallet = async (type: 'metamask' | 'walletconnect') => {
-    setIsConnecting(true);
-
-    try {
-      if (type === 'metamask') {
-        await connectMetaMask();
-      } else if (type === 'walletconnect') {
-        await connectWalletConnect();
-      }
-    } catch (error: any) {
-      console.error('Error connecting wallet:', error);
-      throw error;
-    } finally {
-      setIsConnecting(false);
-    }
-  };
-
-  const disconnectWallet = () => {
-    setAccount(null);
-    setBalance(null);
-    setIsConnected(false);
-    setWalletType(null);
-    setNetworkId(null);
-  };
-
-  const requestTokens = async () => {
-    if (!account) {
-      throw new Error('Please connect your wallet first');
-    }
-
-    if (networkId !== SEPOLIA_CHAIN_ID) {
-      throw new Error('Please switch to Sepolia testnet');
-    }
-
-    setIsRequestingTokens(true);
-
-    try {
-      # Simulate successful faucet request for demo
-      await new Promise(resolve => setTimeout(resolve, 2000));
-
-      # Update balance after successful request
-      setTimeout(updateBalance, 3000);
-
-      return { success: true, message: 'Tokens requested successfully' };
-    } catch (error) {
-      console.error('Error requesting tokens:', error);
-      throw error;
-    } finally {
-      setIsRequestingTokens(false);
-    }
-  };
-
-  const value: WalletContextType = {
-    account,
-    balance,
-    isConnected,
-    isConnecting,
-    walletType,
-    connectWallet,
-    disconnectWallet,
-    requestTokens,
-    isRequestingTokens,
-    networkId,
-  };
-
-  return (
-    <WalletContext.Provider value={value}>
-      {children}
-    </WalletContext.Provider>
-  );
-};
 
 export const useWallet = () => {
   const context = useContext(WalletContext);
@@ -332,8 +134,305 @@ export const useWallet = () => {
   return context;
 };
 
-declare global {
-  interface Window {
-    ethereum?: any;
-  }
+interface WalletProviderProps {
+  children: ReactNode;
 }
+
+export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
+  // State management
+  const [account, setAccount] = useState<string | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(false);
+  const [walletType, setWalletType] = useState<'web3auth' | 'reown' | null>(null);
+  const [chainId, setChainId] = useState<number | null>(null);
+  const [networkName, setNetworkName] = useState<string | null>(null);
+  const [ethBalance, setEthBalance] = useState<string | null>(null);
+  const [xmrtBalance, setXmrtBalance] = useState<string | null>(null);
+  const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
+
+  // Initialize Web3Auth
+  useEffect(() => {
+    const init = async () => {
+      try {
+        await web3auth.initModal();
+
+        // Check if already connected
+        if (web3auth.connected) {
+          const web3authProvider = web3auth.provider;
+          if (web3authProvider) {
+            const ethersProvider = new ethers.BrowserProvider(web3authProvider as any);
+            setProvider(ethersProvider);
+
+            const signer = await ethersProvider.getSigner();
+            const address = await signer.getAddress();
+            const network = await ethersProvider.getNetwork();
+
+            setAccount(address);
+            setChainId(Number(network.chainId));
+            setNetworkName(network.name);
+            setWalletType('web3auth');
+            setIsConnected(true);
+
+            await refreshBalances();
+          }
+        }
+      } catch (error) {
+        console.error('Error initializing Web3Auth:', error);
+      }
+    };
+
+    init();
+  }, []);
+
+  // Connect via Web3Auth
+  const connectWeb3Auth = async () => {
+    try {
+      setIsConnecting(true);
+
+      const web3authProvider = await web3auth.connect();
+      if (web3authProvider) {
+        const ethersProvider = new ethers.BrowserProvider(web3authProvider as any);
+        setProvider(ethersProvider);
+
+        const signer = await ethersProvider.getSigner();
+        const address = await signer.getAddress();
+        const network = await ethersProvider.getNetwork();
+
+        setAccount(address);
+        setChainId(Number(network.chainId));
+        setNetworkName(network.name);
+        setWalletType('web3auth');
+        setIsConnected(true);
+
+        await refreshBalances();
+      }
+    } catch (error) {
+      console.error('Error connecting Web3Auth:', error);
+      throw error;
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  // Connect via Reown
+  const connectReown = async () => {
+    try {
+      setIsConnecting(true);
+      modal.open();
+
+      // Listen for connection
+      const unsubscribe = modal.subscribeState((state) => {
+        if (state.open === false && state.selectedNetworkId) {
+          // Connection successful
+          setWalletType('reown');
+          setIsConnected(true);
+          // Additional setup would be handled by Reown's state management
+        }
+      });
+
+      return unsubscribe;
+    } catch (error) {
+      console.error('Error connecting Reown:', error);
+      throw error;
+    } finally {
+      setIsConnecting(false);
+    }
+  };
+
+  // Disconnect wallet
+  const disconnect = async () => {
+    try {
+      if (walletType === 'web3auth' && web3auth.connected) {
+        await web3auth.logout();
+      } else if (walletType === 'reown') {
+        modal.close();
+      }
+
+      // Reset state
+      setAccount(null);
+      setIsConnected(false);
+      setWalletType(null);
+      setChainId(null);
+      setNetworkName(null);
+      setEthBalance(null);
+      setXmrtBalance(null);
+      setProvider(null);
+    } catch (error) {
+      console.error('Error disconnecting:', error);
+      throw error;
+    }
+  };
+
+  // Switch to Sepolia network
+  const switchToSepolia = async () => {
+    if (!provider) return;
+
+    try {
+      await provider.send('wallet_switchEthereumChain', [
+        { chainId: '0xaa36a7' } // Sepolia
+      ]);
+    } catch (error: any) {
+      // If network doesn't exist, add it
+      if (error.code === 4902) {
+        await provider.send('wallet_addEthereumChain', [
+          {
+            chainId: '0xaa36a7',
+            chainName: 'Sepolia Testnet',
+            nativeCurrency: {
+              name: 'ETH',
+              symbol: 'ETH',
+              decimals: 18,
+            },
+            rpcUrls: [`https://sepolia.infura.io/v3/${INFURA_KEY}`],
+            blockExplorerUrls: ['https://sepolia.etherscan.io'],
+          },
+        ]);
+      } else {
+        throw error;
+      }
+    }
+  };
+
+  // Refresh balances
+  const refreshBalances = async () => {
+    if (!provider || !account) return;
+
+    try {
+      // Get ETH balance
+      const ethBal = await provider.getBalance(account);
+      setEthBalance(ethers.formatEther(ethBal));
+
+      // Get XMRT balance
+      const xmrtContract = new ethers.Contract(XMRT_CONTRACT_ADDRESS, XMRT_ABI, provider);
+      const xmrtBal = await xmrtContract.balanceOf(account);
+      const decimals = await xmrtContract.decimals();
+      setXmrtBalance(ethers.formatUnits(xmrtBal, decimals));
+
+    } catch (error) {
+      console.error('Error refreshing balances:', error);
+    }
+  };
+
+  // Request faucet tokens
+  const requestFaucet = async (): Promise<{ success: boolean; txHash?: string; error?: string }> => {
+    if (!provider || !account) {
+      return { success: false, error: 'Wallet not connected' };
+    }
+
+    try {
+      const signer = await provider.getSigner();
+      const xmrtContract = new ethers.Contract(XMRT_CONTRACT_ADDRESS, XMRT_ABI, signer);
+
+      // Check cooldown
+      const lastFaucetTime = await xmrtContract.lastFaucetTime(account);
+      const cooldown = await xmrtContract.faucetCooldown();
+      const now = Math.floor(Date.now() / 1000);
+
+      if (Number(lastFaucetTime) + Number(cooldown) > now) {
+        const remainingTime = Number(lastFaucetTime) + Number(cooldown) - now;
+        return { 
+          success: false, 
+          error: `Faucet cooldown active. Try again in ${Math.ceil(remainingTime / 60)} minutes.` 
+        };
+      }
+
+      // Request faucet
+      const tx = await xmrtContract.faucet();
+      await tx.wait();
+
+      // Refresh balances
+      await refreshBalances();
+
+      return { success: true, txHash: tx.hash };
+    } catch (error: any) {
+      console.error('Faucet error:', error);
+      return { 
+        success: false, 
+        error: error.reason || error.message || 'Faucet request failed' 
+      };
+    }
+  };
+
+  // Get faucet cooldown
+  const getFaucetCooldown = async (): Promise<number> => {
+    if (!provider || !account) return 0;
+
+    try {
+      const xmrtContract = new ethers.Contract(XMRT_CONTRACT_ADDRESS, XMRT_ABI, provider);
+      const lastFaucetTime = await xmrtContract.lastFaucetTime(account);
+      const cooldown = await xmrtContract.faucetCooldown();
+      const now = Math.floor(Date.now() / 1000);
+
+      const remainingTime = Number(lastFaucetTime) + Number(cooldown) - now;
+      return Math.max(0, remainingTime);
+    } catch (error) {
+      console.error('Error getting faucet cooldown:', error);
+      return 0;
+    }
+  };
+
+  // Get provider
+  const getProvider = () => provider;
+
+  // Listen for account changes
+  useEffect(() => {
+    if (provider) {
+      const handleAccountsChanged = (accounts: string[]) => {
+        if (accounts.length === 0) {
+          disconnect();
+        } else {
+          setAccount(accounts[0]);
+          refreshBalances();
+        }
+      };
+
+      const handleChainChanged = (chainId: string) => {
+        setChainId(parseInt(chainId, 16));
+        refreshBalances();
+      };
+
+      // For Web3Auth
+      if (walletType === 'web3auth') {
+        provider.on('accountsChanged', handleAccountsChanged);
+        provider.on('chainChanged', handleChainChanged);
+      }
+
+      return () => {
+        if (provider.removeAllListeners) {
+          provider.removeAllListeners();
+        }
+      };
+    }
+  }, [provider, walletType]);
+
+  const contextValue: WalletContextType = {
+    account,
+    isConnected,
+    isConnecting,
+    walletType,
+    chainId,
+    networkName,
+    ethBalance,
+    xmrtBalance,
+    connectWeb3Auth,
+    connectReown,
+    disconnect,
+    switchToSepolia,
+    requestFaucet,
+    getFaucetCooldown,
+    refreshBalances,
+    getProvider,
+  };
+
+  return (
+    <WagmiProvider config={wagmiAdapter.wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <WalletContext.Provider value={contextValue}>
+          {children}
+        </WalletContext.Provider>
+      </QueryClientProvider>
+    </WagmiProvider>
+  );
+};
+
+export default WalletProvider;
