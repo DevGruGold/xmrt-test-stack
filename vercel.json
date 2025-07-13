@@ -1,0 +1,60 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "env": {
+    "VITE_INFURA_API_KEY": "@vite-infura-api-key",
+    "VITE_REOWN_PROJECT_ID": "@vite-reown-project-id",
+    "VITE_WEB3AUTH_CLIENT_ID": "@vite-web3auth-client-id",
+    "VITE_WEB3AUTH_CLIENT_SECRET": "@vite-web3auth-client-secret",
+    "VITE_XMRT_CONTRACT_ADDRESS": "@vite-xmrt-contract-address",
+    "VITE_NETWORK_NAME": "@vite-network-name",
+    "VITE_CHAIN_ID": "@vite-chain-id",
+    "VITE_RPC_URL": "@vite-rpc-url",
+    "VITE_BLOCK_EXPLORER_URL": "@vite-block-explorer-url",
+    "VITE_APP_NAME": "@vite-app-name",
+    "VITE_APP_DESCRIPTION": "@vite-app-description",
+    "VITE_APP_URL": "@vite-app-url",
+    "VITE_APP_ICON": "@vite-app-icon"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ],
+  "functions": {
+    "app/api/**/*.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}
